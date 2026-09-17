@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Naša svadba</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;1,9..144,450&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FBF7F0;
+    --paper:#FFFFFF;
+    --ink:#2A2420;
+    --ink-soft:#6B6058;
+    --gold:#AD8A4E;
+    --gold-deep:#8C6E39;
+    --gold-mist:#EFE3CB;
+    --line:#E7DFCF;
+    --blush:#E9DCD2;
+    --sage:#7C8B6F;
+    --danger:#A6483B;
+    --shadow: 0 1px 0 rgba(42,36,32,0.04);
+    --radius: 2px;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --cream:#1B1714;
+      --paper:#221D19;
+      --ink:#EFE8DD;
+      --ink-soft:#B3A99C;
+      --gold:#D6B876;
+      --gold-deep:#E2C68A;
+      --gold-mist:#3A2F22;
+      --line:#3A322B;
+      --blush:#332924;
+      --sage:#94A186;
+      --danger:#D98A7C;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --cream:#1B1714;
+    --paper:#221D19;
+    --ink:#EFE8DD;
+    --ink-soft:#B3A99C;
+    --gold:#D6B876;
+    --gold-deep:#E2C68A;
+    --gold-mist:#3A2F22;
+    --line:#3A322B;
+    --blush:#332924;
+    --sage:#94A186;
+    --danger:#D98A7C;
+    color-scheme: dark;
+  }
+
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; padding:0; height:100%;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:15px;
+    line-height:1.5;
+    overscroll-behavior-y:none;
+  }
+  h1,h2,h3,.serif{ font-family:'Fraunces',serif; font-weight:450; color:var(--ink); }
+  button, input, select, textarea{ font-family:inherit; font-size:inherit; color:inherit; }
+  input, select, textarea{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:10px 12px;
+    width:100%;
+    outline:none;
+  }
+  input:focus, select:focus, textarea:focus{ border-color:var(--gold); }
+  button{ cursor:pointer; border:none; background:none; }
+  button:focus-visible, a:focus-visible, [tabindex]:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
+  ::-webkit-scrollbar{ width:0; height:0; }
+
+  #app{ max-width:520px; margin:0 auto; min-height:100vh; display:flex; flex-direction:column; position:relative; background:var(--cream); }
+
+  /* ---------- Top bar ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:20;
+    background:var(--cream);
+    padding:18px 20px 14px;
+    display:flex; align-items:baseline; justify-content:space-between;
+    border-bottom:1px solid var(--line);
+  }
+  .topbar .brand{ font-size:20px; letter-spacing:.2px; }
+  .topbar .brand em{ font-style:normal; color:var(--gold-deep); }
+  .icon-btn{ font-size:18px; padding:6px; line-height:1; color:var(--ink-soft); }
+
+  /* ---------- Content ---------- */
+  #content{ flex:1; padding:18px 20px 100px; }
+  .view{ animation:fadein .18s ease; }
+  @keyframes fadein{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:none;} }
+
+  /* ---------- Hero / dashboard ---------- */
+  .hero{
+    text-align:center;
+    padding:22px 10px 26px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:20px;
+  }
+  .hero .names{ font-size:26px; margin:0 0 6px; }
+  .hero .date{ color:var(--ink-soft); font-size:13px; letter-spacing:.4px; margin-bottom:16px; }
+  .countdown{ display:flex; justify-content:center; gap:22px; margin-top:6px; }
+  .countdown .num{ font-family:'Fraunces',serif; font-size:34px; color:var(--gold-deep); display:block; line-height:1; }
+  .countdown .lbl{ font-size:11px; color:var(--ink-soft); letter-spacing:.3px; }
+
+  .stat-row{ display:flex; gap:10px; margin-bottom:22px; }
+  .stat-card{ flex:1; background:var(--paper); border:1px solid var(--line); padding:14px 12px; border-radius:var(--radius); }
+  .stat-card .n{ font-family:'Fraunces',serif; font-size:22px; display:block; }
+  .stat-card .l{ font-size:11.5px; color:var(--ink-soft); margin-top:2px; }
+
+  .section-title{ display:flex; align-items:baseline; justify-content:space-between; margin:26px 0 12px; }
+  .section-title h2{ font-size:17px; margin:0; }
+  .section-title .link{ font-size:12.5px; color:var(--gold-deep); }
+
+  .task-mini, .list-row{
+    display:flex; align-items:center; gap:12px;
+    padding:12px 0; border-bottom:1px solid var(--line);
+  }
+  .task-mini:last-child, .list-row:last-child{ border-bottom:none; }
+  .checkbox{
+    width:19px; height:19px; border:1.5px solid var(--gold); border-radius:50%;
+    flex:none; display:flex; align-items:center; justify-content:center; color:var(--paper); font-size:11px;
+  }
+  .checkbox.done{ background:var(--gold); }
+  .row-main{ flex:1; min-width:0; }
+  .row-title{ font-size:14.5px; }
+  .row-title.done{ text-decoration:line-through; color:var(--ink-soft); }
+  .row-sub{ font-size:12px; color:var(--ink-soft); margin-top:2px; }
+  .tag{ font-size:10.5px; padding:2px 8px; border-radius:20px; background:var(--gold-mist); color:var(--gold-deep); white-space:nowrap; }
+
+  .empty{ text-align:center; padding:40px 10px; color:var(--ink-soft); }
+  .empty .em-ico{ font-size:28px; display:block; margin-bottom:10px; }
+  .empty p{ margin:0 0 16px; font-size:13.5px; }
+
+  /* ---------- Bottom nav ---------- */
+  .tabbar{
+    position:sticky; bottom:0; z-index:20;
+    display:flex; background:var(--paper); border-top:1px solid var(--line);
+    padding:8px 6px calc(8px + env(safe-area-inset-bottom));
+  }
+  .tab{
+    flex:1; display:flex; flex-direction:column; align-items:center; gap:3px;
+    padding:6px 2px; color:var(--ink-soft); font-size:10.5px; letter-spacing:.2px;
+  }
+  .tab .ic{ font-size:19px; }
+  .tab.active{ color:var(--gold-deep); }
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:6px;
+    padding:11px 18px; border-radius:var(--radius); font-size:13.5px; font-weight:500;
+  }
+  .btn-gold{ background:var(--gold); color:#fff; }
+  :root[data-theme="dark"] .btn-gold, @media (prefers-color-scheme:dark){ .btn-gold{ color:#221D19; } }
+  .btn-outline{ border:1px solid var(--line); color:var(--ink); }
+  .btn-block{ width:100%; }
+  .fab{
+    position:fixed; z-index:30; right:calc(50% - 260px + 20px); bottom:86px;
+    width:52px; height:52px; border-radius:50%; background:var(--gold); color:#fff;
+    font-size:24px; display:flex; align-items:center; justify-content:center;
+    box-shadow:0 6px 16px rgba(140,110,57,.35);
+  }
+  @media (max-width:560px){ .fab{ right:20px; } }
+
+  /* ---------- List header / add bar ---------- */
+  .list-header{ display:flex; gap:8px; margin-bottom:14px; }
+  .list-header select{ flex:none; width:auto; }
+  .search{ flex:1; }
+
+  /* ---------- Progress ---------- */
+  .progress{ height:6px; background:var(--gold-mist); border-radius:6px; overflow:hidden; }
+  .progress > div{ height:100%; background:var(--gold); }
+
+  /* ---------- Budget ---------- */
+  .budget-hero{ text-align:center; padding:8px 0 24px; }
+  .budget-hero .amt{ font-family:'Fraunces',serif; font-size:32px; }
+  .budget-hero .amt small{ font-size:14px; color:var(--ink-soft); font-family:'Inter',sans-serif; }
+  .cat-row{ padding:14px 0; border-bottom:1px solid var(--line); }
+  .cat-row:last-child{ border-bottom:none; }
+  .cat-top{ display:flex; justify-content:space-between; font-size:13.5px; margin-bottom:8px; }
+  .cat-top .amt-sub{ color:var(--ink-soft); }
+
+  /* ---------- More menu ---------- */
+  .more-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .more-item{
+    background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
+    padding:18px 14px; display:flex; flex-direction:column; gap:8px; text-align:left;
+  }
+  .more-item .mi-ico{ font-size:20px; }
+  .more-item .mi-t{ font-size:13.5px; }
+
+  /* ---------- Modal ---------- */
+  .overlay{
+    position:fixed; inset:0; background:rgba(20,16,12,.42); z-index:50;
+    display:flex; align-items:flex-end; justify-content:center;
+    opacity:0; pointer-events:none; transition:opacity .18s ease;
+  }
+  .overlay.show{ opacity:1; pointer-events:auto; }
+  .sheet{
+    width:100%; max-width:520px; background:var(--paper);
+    border-radius:16px 16px 0 0; padding:22px 20px calc(22px + env(safe-area-inset-bottom));
+    max-height:86vh; overflow-y:auto;
+    transform:translateY(16px); transition:transform .2s ease;
+  }
+  .overlay.show .sheet{ transform:translateY(0); }
+  .sheet h3{ margin:0 0 16px; font-size:18px; }
+  .field{ margin-bottom:14px; }
+  .field label{ display:block; font-size:12px; color:var(--ink-soft); margin-bottom:6px; }
+  .field-check{ display:flex; align-items:center; gap:10px; }
+  .field-check input{ width:auto; }
+  .sheet-actions{ display:flex; gap:10px; margin-top:18px; }
+  .sheet-actions .btn{ flex:1; }
+  .sheet-close{ text-align:right; margin-bottom:4px; }
+  .sheet-close button{ color:var(--ink-soft); font-size:13px; }
+  .delete-link{ display:block; text-align:center; margin-top:14px; color:var(--danger); font-size:13px; }
+
+  .toast{
+    position:fixed; left:50%; bottom:96px; transform:translateX(-50%);
+    background:var(--ink); color:var(--cream); padding:10px 18px; border-radius:20px;
+    font-size:13px; z-index:60; opacity:0; transition:opacity .2s ease, transform .2s ease;
+    pointer-events:none;
+  }
+  .toast.show{ opacity:1; }
+
+  /* seating */
+  .table-card{ background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:14px; margin-bottom:12px; }
+  .table-card h4{ margin:0 0 4px; font-size:14.5px; font-weight:600; font-family:'Inter',sans-serif; }
+  .seat-chip{ display:inline-flex; align-items:center; gap:6px; background:var(--gold-mist); color:var(--gold-deep); border-radius:20px; padding:5px 10px; font-size:12px; margin:3px 4px 0 0; }
+  .seat-chip button{ color:var(--gold-deep); font-size:13px; line-height:1; }
+  .unassigned-box{ border:1px dashed var(--line); border-radius:var(--radius); padding:12px; margin-top:16px; }
+
+  a{ color:var(--gold-deep); }
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="topbar">
+    <div class="brand serif">Naša <em>svadba</em></div>
+    <button class="icon-btn" id="themeToggle" aria-label="Prepnúť tmavý režim">◐</button>
+  </div>
+  <div id="content"></div>
+  <button class="fab" id="fabBtn" style="display:none;" aria-label="Pridať">+</button>
+  <div class="tabbar" id="tabbar"></div>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="sheet" id="sheet"></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+"use strict";
+
+/* ===================== STATE ===================== */
+var STORE_KEY = "weddingPlannerData_v1";
+var uid = function(){ return Math.random().toString(36).slice(2,10)+Date.now().toString(36); };
+
+var defaultData = function(){ return {
+  weddingDate: "",
+  names: "",
+  budgetTotal: 0,
+  categories: [
+    {id:uid(), name:"Sála a catering"},
+    {id:uid(), name:"Šaty a oblek"},
+    {id:uid(), name:"Fotograf/kameraman"},
+    {id:uid(), name:"Kvety a výzdoba"},
+    {id:uid(), name:"Hudba/DJ"},
+    {id:uid(), name:"Ostatné"}
+  ],
+  expenses: [],
+  tasks: [],
+  guests: [],
+  tables: [],
+  vendors: [],
+  inspirations: [],
+  playlist: [],
+  notes: [],
+  gifts: [],
+  transport: [],
+  reminders: [],
+  events: [],
+  darkMode: null
+};};
+
+var data = null;
+
+function load(){
+  try{
+    var raw = localStorage.getItem(STORE_KEY);
+    data = raw ? JSON.parse(raw) : defaultData();
+  }catch(e){ data = defaultData(); }
+  var def = defaultData();
+  for(var k in def){ if(!(k in data)) data[k] = def[k]; }
+}
+function save(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(data)); }catch(e){}
+}
+
+/* ===================== HELPERS ===================== */
+function el(html){ var t=document.createElement('template'); t.innerHTML=html.trim(); return t.content.firstChild; }
+function fmtMoney(n){ n = Number(n)||0; return n.toLocaleString('sk-SK',{maximumFractionDigits:0}) + " €"; }
+function fmtDate(d){
+  if(!d) return "";
+  var dt = new Date(d+"T00:00:00");
+  if(isNaN(dt)) return d;
+  return dt.toLocaleDateString('sk-SK',{day:'numeric',month:'long',year:'numeric'});
+}
+function fmtDateShort(d){
+  if(!d) return "";
+  var dt = new Date(d+"T00:00:00");
+  if(isNaN(dt)) return d;
+  return dt.toLocaleDateString('sk-SK',{day:'numeric',month:'short'});
+}
+function showToast(msg){
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(showToast._h);
+  showToast._h = setTimeout(function(){ t.classList.remove('show'); }, 1800);
+}
+function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+
+/* ===================== NAV ===================== */
+var TABS = [
+  {id:'home', label:'Domov', icon:'🏠'},
+  {id:'tasks', label:'Úlohy', icon:'✅'},
+  {id:'guests', label:'Hostia', icon:'👥'},
+  {id:'budget', label:'Rozpočet', icon:'💰'},
+  {id:'more', label:'Viac', icon:'⋯'}
+];
+var MORE_ITEMS = [
+  {id:'calendar', label:'Kalendár a harmonogram', icon:'📅'},
+  {id:'seating', label:'Zasadací poriadok', icon:'🪑'},
+  {id:'vendors', label:'Dodávatelia', icon:'📞'},
+  {id:'inspirations', label:'Inšpirácie', icon:'📸'},
+  {id:'playlist', label:'Playlist', icon:'🎵'},
+  {id:'notes', label:'Poznámky', icon:'📝'},
+  {id:'gifts', label:'Darčeky', icon:'🎁'},
+  {id:'transport', label:'Doprava a ubytovanie', icon:'🚗'},
+  {id:'reminders', label:'Pripomienky', icon:'🔔'},
+  {id:'settings', label:'Nastavenia', icon:'⚙️'}
+];
+var state = { view:'home' };
+
+function goto(view){
+  state.view = view;
+  render();
+  document.getElementById('content').scrollTop = 0;
+  window.scrollTo(0,0);
+}
+
+/* ===================== GENERIC LIST CONFIG ===================== */
+/* Each config: fields for the add/edit sheet, and a render function for list rows */
+var CONFIGS = {};
+
+CONFIGS.tasks = {
+  title:"Nová úloha", empty:{ico:'✅', text:'Zatiaľ žiadne úlohy. Pridaj prvú vec, ktorú treba vybaviť.'},
+  fields:[
+    {key:'title', label:'Názov úlohy', type:'text', required:true, placeholder:'Napr. Objednať kvety'},
+    {key:'category', label:'Kategória', type:'select', options:['Sála','Šaty','Fotograf','Kvety','Hudba','Doklady','Ostatné']},
+    {key:'dueDate', label:'Termín', type:'date'}
+  ],
+  sort:function(a,b){
+    if(!!a.done !== !!b.done) return a.done ? 1 : -1;
+    return (a.dueDate||'9999').localeCompare(b.dueDate||'9999');
+  },
+  rowHtml:function(item){
+    var sub = [item.category, item.dueDate?fmtDateShort(item.dueDate):''].filter(Boolean).join(' · ');
+    return '<div class="row-main"><div class="row-title '+(item.done?'done':'')+'">'+esc(item.title)+'</div>'+
+      (sub?'<div class="row-sub">'+esc(sub)+'</div>':'')+'</div>';
+  },
+  hasCheckbox:true
+};
+
+CONFIGS.guests = {
+  title:"Nový hosť", empty:{ico:'👥', text:'Zoznam hostí je zatiaľ prázdny.'},
+  fields:[
+    {key:'name', label:'Meno a priezvisko', type:'text', required:true},
+    {key:'side', label:'Strana', type:'select', options:['Nevesta','Ženích','Spoločné']},
+    {key:'rsvp', label:'RSVP', type:'select', options:['Čaká sa','Príde','Nepríde']},
+    {key:'plusOne', label:'Doprovod (+1)', type:'checkbox'},
+    {key:'children', label:'Počet detí', type:'number'},
+    {key:'menu', label:'Menu', type:'select', options:['Mäsité','Vegetariánske','Vegánske','Bezlepkové','Iné']},
+    {key:'accommodation', label:'Ubytovanie potrebné', type:'checkbox'},
+    {key:'notes', label:'Poznámka', type:'textarea'}
+  ],
+  sort:function(a,b){ return (a.name||'').localeCompare(b.name||'','sk'); },
+  rowHtml:function(item){
+    var sub = [item.side, item.rsvp, item.menu].filter(Boolean).join(' · ');
+    return '<div class="row-main"><div class="row-title">'+esc(item.name)+'</div>'+
+      '<div class="row-sub">'+esc(sub)+'</div></div>'+
+      (item.rsvp?'<span class="tag">'+esc(item.rsvp)+'</span>':'');
+  }
+};
+
+CONFIGS.vendors = {
+  title:"Nový dodávateľ", empty:{ico:'📞', text:'Zatiaľ žiadni dodávatelia. Pridaj fotografa, DJ-a, kvetinárstvo…'},
+  fields:[
+    {key:'name', label:'Názov / meno', type:'text', required:true},
+    {key:'category', label:'Kategória', type:'select', options:['Sála','Catering','Fotograf','Kameraman','DJ/Kapela','Kvety','Torta','Šaty','Oblek','Doprava','Ostatné']},
+    {key:'phone', label:'Telefón', type:'text'},
+    {key:'price', label:'Cena (€)', type:'number'},
+    {key:'status', label:'Stav', type:'select', options:['Oslovený','Dohodnuté','Zaplatené']},
+    {key:'notes', label:'Poznámka', type:'textarea'}
+  ],
+  sort:function(a,b){ return (a.category||'').localeCompare(b.category||'','sk'); },
+  rowHtml:function(item){
+    var sub = [item.category, item.phone, item.price?fmtMoney(item.price):''].filter(Boolean).join(' · ');
+    return '<div class="row-main"><div class="row-title">'+esc(item.name)+'</div>'+
+      '<div class="row-sub">'+esc(sub)+'</div></div>'+
+      (item.status?'<span class="tag">'+esc(item.status)+'</span>':'');
+  }
+};
+
+CONFIGS.inspirations = {
+  title:"Nová inšpirácia", empty:{ico:'📸', text:'Zbieraj nápady na výzdobu, šaty či torty.'},
+  fields:[
+    {key:'title', label:'Názov', type:'text', required:true},
+    {key:'category', label:'Kategória', type:'select', options:['Výzdoba','Šaty','Účes/mejkap','Torta','Kytica','Ostatné']},
+    {key:'url', label:'Odkaz (URL)', type:'text'},
+    {key:'notes', label:'Poznámka', type:'textarea'}
+  ],
+  sort:function(a,b){ return 0; },
+  rowHtml:function(item){
+    var sub = [item.category].filter(Boolean).join(' · ');
+    return '<div class="row-main"><div class="row-title">'+esc(item.title)+'</div>'+
+      (sub?'<div class="row-sub">'+esc(sub)+'</div>':'')+
+      (item.url?'<div class="row-sub">🔗 '+esc(item.url)+'</div>':'')+'</div>';
+  }
+};
+
+CONFIGS.playlist = {
+  title:"Nová pieseň", empty:{ico:'🎵', text:'Vytvor si playlist na svadbu.'},
+  fields:[
+    {key:'title', label:'Názov piesne', type:'text', required:true},
+    {key:'artist', label:'Interpret', type:'text'},
+    {key:'moment', label:'Moment', type:'select', options:['Príchod','Prvý tanec','Zábava','Posledná pieseň','Ostatné']}
+  ],
+  sort:function(a,b){ return 0; },
+  rowHtml:function(item){
+    var sub = [item.artist, item.moment].filter(Boolean).join(' · ');
+    return '<div class="row-main"><div class="row-title">'+esc(item.title)+'</div>'+
+      (sub?'<div class="row-sub">'+esc(sub)+'</div>':'')+'</div>';
+  }
+};
+
+CONFIGS.notes = {
+  title:"Nová poznámka", empty:{ico:'📝', text:'Zapíš si nápady a dôležité veci.'},
+  fields:[
+    {key:'text', label:'Poznámka', type:'textarea', required:true}
+  ],
+  sort:function(a,b){ return (b.createdAt||'').localeCompare(a.createdAt||''); },
+  rowHtml:function(item){
+    return '<div class="row-main"><div class="row-title">'+esc(item.text)+'</div>'+
+      (item.createdAt?'<div class="row-sub">'+esc(item.createdAt)+'</div>':'')+'</div>';
+  }
+};
+
+CONFIGS.gifts = {
+  title:"Nový darček", empty:{ico:'🎁', text:'Sleduj darčeky a poďakovania.'},
+  fields:[
+    {key:'from', label:'Od koho', type:'text', required:true},
+    {key:'item', label:'Darček', type:'text'},
+    {key:'thanked', label:'Poďakované', type:'checkbox'}
+  ],
+  sort:function(a,b){ return (a.from||'').localeCompare(b.from||'','sk'); },
+  rowHtml:function(item){
+    return '<div class="row-main"><div class="row-title">'+esc(item.from)+'</div>'+
+      (item.item?'<div class="row-sub">'+esc(item.item)+'</div>':'')+'</div>'+
+      (item.thanked?'<span class="tag">Poďakované</span>':'');
+  },
+  hasCheckbox:true, checkboxKey:'thanked'
+};
+
+CONFIGS.transport = {
+  title:"Nová položka dopravy", empty:{ico:'🚗', text:'Naplánuj dopravu a ubytovanie pre hostí.'},
+  fields:[
+    {key:'title', label:'Názov', type:'text', required:true, placeholder:'Napr. Autobus pre hostí / Hotel Rezidencia'},
+    {key:'type', label:'Typ', type:'select', options:['Doprava','Ubytovanie']},
+    {key:'date', label:'Dátum', type:'date'},
+    {key:'time', label:'Čas', type:'text'},
+    {key:'notes', label:'Poznámka', type:'textarea'}
+  ],
+  sort:function(a,b){ return (a.date||'').localeCompare(b.date||''); },
+  rowHtml:function(item){
+    var sub = [item.type, item.date?fmtDateShort(item.date):'', item.time].filter(Boolean).join(' · ');
+    return '<div class="row-main"><div class="row-title">'+esc(item.title)+'</div>'+
+      (sub?'<div class="row-sub">'+esc(sub)+'</div>':'')+'</div>';
+  }
+};
+
+CONFIGS.reminders = {
+  title:"Nová pripomienka", empty:{ico:'🔔', text:'Nastav si pripomienky na dôležité termíny.'},
+  fields:[
+    {key:'text', label:'Text pripomienky', type:'text', required:true},
+    {key:'date', label:'Dátum', type:'date'}
+  ],
+  sort:function(a,b){
+    if(!!a.done !== !!b.done) return a.done ? 1 : -1;
+    return (a.date||'9999').localeCompare(b.date||'9999');
+  },
+  rowHtml:function(item){
+    return '<div class="row-main"><div class="row-title '+(item.done?'done':'')+'">'+esc(item.text)+'</div>'+
+      (item.date?'<div class="row-sub">'+esc(fmtDateShort(item.date))+'</div>':'')+'</div>';
+  },
+  hasCheckbox:true
+};
+
+CONFIGS.events = {
+  title:"Nová položka harmonogramu", empty:{ico:'📅', text:'Naplánuj harmonogram svadobného dňa.'},
+  fields:[
+    {key:'title', label:'Názov', type:'text', required:true, placeholder:'Napr. Obrad, Príchod hostí…'},
+    {key:'date', label:'Dátum', type:'date'},
+    {key:'time', label:'Čas', type:'text', placeholder:'napr. 14:30'}
+  ],
+  sort:function(a,b){ return (a.date+" "+a.time||'').localeCompare(b.date+" "+b.time||''); },
+  rowHtml:function(item){
+    var sub = [item.date?fmtDateShort(item.date):'', item.time].filter(Boolean).join(' · ');
+    return '<div class="row-main"><div class="row-title">'+esc(item.title)+'</div>'+
+      (sub?'<div class="row-sub">'+esc(sub)+'</div>':'')+'</div>';
+  }
+};
+
+/* ===================== RENDER ROOT ===================== */
+function render(){
+  renderTabbar();
+  var c = document.getElementById('content');
+  c.innerHTML = '';
+  var v = el('<div class="view"></div>');
+  c.appendChild(v);
+
+  var fab = document.getElementById('fabBtn');
+  fab.style.display = 'none';
+  fab.onclick = null;
+
+  if(state.view === 'home') renderHome(v);
+  else if(state.view === 'budget') renderBudget(v);
+  else if(state.view === 'seating') renderSeating(v);
+  else if(state.view === 'settings') renderSettings(v);
+  else if(state.view === 'more') renderMore(v);
+  else if(CONFIGS[state.view]) renderGenericList(v, state.view);
+  else renderHome(v);
+}
+
+function renderTabbar(){
+  var bar = document.getElementById('tabbar');
+  bar.innerHTML = '';
+  var activeTop = ['home','tasks','guests','budget'].indexOf(state.view) === -1 ? 'more' : state.view;
+  TABS.forEach(function(t){
+    var b = el('<button class="tab '+(t.id===activeTop?'active':'')+'"><span class="ic">'+t.icon+'</span><span>'+t.label+'</span></button>');
+    b.onclick = function(){ goto(t.id); };
+    bar.appendChild(b);
+  });
+}
+
+/* ===================== HOME / DASHBOARD ===================== */
+function renderHome(root){
+  var d = data;
+  var hero = el('<div class="hero"></div>');
+  var namesLine = d.names ? d.names : 'Naša svadba';
+  hero.innerHTML = '<h1 class="names serif">'+esc(namesLine)+'</h1>' +
+    '<div class="date">'+(d.weddingDate ? fmtDate(d.weddingDate) : 'Nastav dátum svadby v Nastaveniach') +'</div>';
+
+  if(d.weddingDate){
+    var today = new Date(); today.setHours(0,0,0,0);
+    var wd = new Date(d.weddingDate+"T00:00:00");
+    var diff = Math.round((wd-today)/86400000);
+    var cd = el('<div class="countdown"></div>');
+    if(diff >= 0){
+      cd.innerHTML = '<div><span class="num serif">'+diff+'</span><span class="lbl">DNÍ DO SVADBY</span></div>';
+    } else {
+      cd.innerHTML = '<div><span class="num serif">💍</span><span class="lbl">Gratulujeme k svadbe!</span></div>';
+    }
+    hero.appendChild(cd);
+  }
+  root.appendChild(hero);
+
+  var doneTasks = d.tasks.filter(function(t){return t.done;}).length;
+  var totalTasks = d.tasks.length;
+  var confirmedGuests = d.guests.filter(function(g){return g.rsvp==='Príde';}).length;
+  var spent = d.expenses.reduce(function(s,e){return s+(Number(e.amount)||0);},0);
+
+  var stats = el('<div class="stat-row"></div>');
+  stats.appendChild(el('<div class="stat-card"><span class="n serif">'+doneTasks+'/'+totalTasks+'</span><span class="l">Úlohy hotové</span></div>'));
+  stats.appendChild(el('<div class="stat-card"><span class="n serif">'+confirmedGuests+'</span><span class="l">Potvrdení hostia</span></div>'));
+  stats.appendChild(el('<div class="stat-card"><span class="n serif">'+fmtMoney(spent)+'</span><span class="l">Minuté z rozpočtu</span></div>'));
+  root.appendChild(stats);
+
+  // upcoming tasks
+  var upcoming = d.tasks.filter(function(t){return !t.done;}).sort(CONFIGS.tasks.sort).slice(0,4);
+  var st = el('<div class="section-title"><h2>Najbližšie úlohy</h2><span class="link" data-go="tasks">Všetky →</span></div>');
+  st.querySelector('.link').onclick = function(){ goto('tasks'); };
+  root.appendChild(st);
+  if(upcoming.length===0){
+    root.appendChild(el('<div class="empty"><span class="em-ico">✅</span><p>Žiadne otvorené úlohy. Skvelá práca!</p></div>'));
+  } else {
+    var wrap = el('<div></div>');
+    upcoming.forEach(function(t){
+      var row = el('<div class="task-mini"><div class="checkbox '+(t.done?'done':'')+'">'+(t.done?'✓':'')+'</div></div>');
+      row.appendChild(el(CONFIGS.tasks.rowHtml(t)));
+      row.querySelector('.checkbox').onclick = function(){ t.done = !t.done; save(); render(); };
+      wrap.appendChild(row);
+    });
+    root.appendChild(wrap);
+  }
+
+  // Quick links
+  var st2 = el('<div class="section-title"><h2>Rýchly prístup</h2></div>');
+  root.appendChild(st2);
+  var grid = el('<div class="more-grid"></div>');
+  [
+    {id:'vendors', icon:'📞', label:'Dodávatelia'},
+    {id:'seating', icon:'🪑', label:'Zasadací poriadok'},
+    {id:'calendar', icon:'📅', label:'Harmonogram'},
+    {id:'reminders', icon:'🔔', label:'Pripomienky'}
+  ].forEach(function(m){
+    var it = el('<button class="more-item"><span class="mi-ico">'+m.icon+'</span><span class="mi-t">'+m.label+'</span></button>');
+    it.onclick = function(){ goto(m.id); };
+    grid.appendChild(it);
+  });
+  root.appendChild(grid);
+}
+
+/* ===================== GENERIC LIST VIEW ===================== */
+function renderGenericList(root, key){
+  var cfg = CONFIGS[key];
+  var items = data[key].slice().sort(cfg.sort);
+
+  var titleMap = {tasks:'Úlohy', guests:'Hostia', vendors:'Dodávatelia', inspirations:'Inšpirácie', playlist:'Playlist', notes:'Poznámky', gifts:'Darčeky', transport:'Doprava a ubytovanie', reminders:'Pripomienky', events:'Kalendár a harmonogram'};
+  root.appendChild(el('<div class="section-title" style="margin-top:4px;"><h2>'+titleMap[key]+'</h2></div>'));
+
+  if(items.length===0){
+    root.appendChild(el('<div class="empty"><span class="em-ico">'+cfg.empty.ico+'</span><p>'+cfg.empty.text+'</p></div>'));
+  } else {
+    var wrap = el('<div></div>');
+    items.forEach(function(item){
+      var row;
+      if(cfg.hasCheckbox){
+        var ck = cfg.checkboxKey || 'done';
+        row = el('<div class="list-row"><div class="checkbox '+(item[ck]?'done':'')+'">'+(item[ck]?'✓':'')+'</div></div>');
+        row.querySelector('.checkbox').onclick = function(){ item[ck] = !item[ck]; save(); render(); };
+      } else {
+        row = el('<div class="list-row"></div>');
+      }
+      var rest = el(cfg.rowHtml(item));
+      row.appendChild(rest);
+      row.style.cursor = 'pointer';
+      row.addEventListener('click', function(ev){
+        if(ev.target.closest('.checkbox')) return;
+        openEditSheet(key, item.id);
+      });
+      wrap.appendChild(row);
+    });
+    root.appendChild(wrap);
+  }
+
+  var fab = document.getElementById('fabBtn');
+  fab.style.display = 'flex';
+  fab.onclick = function(){ openEditSheet(key, null); };
+}
+
+/* ===================== MORE MENU ===================== */
+function renderMore(root){
+  root.appendChild(el('<div class="section-title" style="margin-top:4px;"><h2>Viac</h2></div>'));
+  var grid = el('<div class="more-grid"></div>');
+  MORE_ITEMS.forEach(function(m){
+    var it = el('<button class="more-item"><span class="mi-ico">'+m.icon+'</span><span class="mi-t">'+m.label+'</span></button>');
+    it.onclick = function(){ goto(m.id); };
+    grid.appendChild(it);
+  });
+  root.appendChild(grid);
+}
+
+/* ===================== CALENDAR (events) ===================== */
+/* uses generic list under key 'events' mapped to 'calendar' view */
+var _origGoto = goto;
+goto = function(view){
+  if(view==='calendar'){ state.view = 'events'; render(); return; }
+  _origGoto(view);
+};
+
+/* ===================== BUDGET ===================== */
+function renderBudget(root){
+  var d = data;
+  var spent = d.expenses.reduce(function(s,e){return s+(Number(e.amount)||0);},0);
+  var remaining = (Number(d.budgetTotal)||0) - spent;
+
+  var hero = el('<div class="budget-hero"></div>');
+  hero.innerHTML = '<div class="row-sub">Minuté / Celkový rozpočet</div>' +
+    '<div class="amt serif">'+fmtMoney(spent)+' <small>/ '+fmtMoney(d.budgetTotal)+'</small></div>';
+  root.appendChild(hero);
+
+  var pct = d.budgetTotal>0 ? Math.min(100, Math.round(spent/d.budgetTotal*100)) : 0;
+  var prog = el('<div class="progress"><div style="width:'+pct+'%"></div></div>');
+  root.appendChild(prog);
+  root.appendChild(el('<div class="row-sub" style="text-align:center;margin-top:8px;">Zostáva '+fmtMoney(remaining)+'</div>'));
+
+  var editBtn = el('<button class="btn btn-outline btn-block" style="margin-top:16px;">Upraviť celkový rozpočet</button>');
+  editBtn.onclick = function(){ openBudgetTotalSheet(); };
+  root.appendChild(editBtn);
+
+  root.appendChild(el('<div class="section-title"><h2>Kategórie</h2></div>'));
+  var catWrap = el('<div></div>');
+  d.categories.forEach(function(cat){
+    var catSpent = d.expenses.filter(function(e){return e.categoryId===cat.id;}).reduce(function(s,e){return s+(Number(e.amount)||0);},0);
+    var row = el('<div class="cat-row"><div class="cat-top"><span>'+esc(cat.name)+'</span><span class="amt-sub">'+fmtMoney(catSpent)+'</span></div>'+
+      '<div class="progress"><div style="width:'+(d.budgetTotal>0?Math.min(100,Math.round(catSpent/(d.budgetTotal||1)*100)):0)+'%"></div></div></div>');
+    catWrap.appendChild(row);
+  });
+  root.appendChild(catWrap);
+
+  root.appendChild(el('<div class="section-title"><h2>Výdavky</h2></div>'));
+  if(d.expenses.length===0){
+    root.appendChild(el('<div class="empty"><span class="em-ico">💰</span><p>Zatiaľ žiadne výdavky.</p></div>'));
+  } else {
+    var wrap = el('<div></div>');
+    d.expenses.slice().sort(function(a,b){return (b.date||'').localeCompare(a.date||'');}).forEach(function(e){
+      var cat = d.categories.find(function(c){return c.id===e.categoryId;});
+      var row = el('<div class="list-row" style="cursor:pointer;"><div class="row-main"><div class="row-title">'+esc(e.name)+'</div>'+
+        '<div class="row-sub">'+esc((cat?cat.name:'')+(e.date?(' · '+fmtDateShort(e.date)):''))+'</div></div>'+
+        '<div class="amt-sub" style="font-weight:600;">'+fmtMoney(e.amount)+'</div></div>');
+      row.onclick = function(){ openExpenseSheet(e.id); };
+      wrap.appendChild(row);
+    });
+    root.appendChild(wrap);
+  }
+
+  var fab = document.getElementById('fabBtn');
+  fab.style.display = 'flex';
+  fab.onclick = function(){ openExpenseSheet(null); };
+}
+
+function openBudgetTotalSheet(){
+  var html = '<div class="sheet-close"><button id="shClose">Zavrieť ✕</button></div>' +
+    '<h3 class="serif">Celkový rozpočet</h3>' +
+    '<div class="field"><label>Suma (€)</label><input type="number" id="fBudget" value="'+(data.budgetTotal||'')+'"></div>' +
+    '<div class="sheet-actions"><button class="btn btn-gold btn-block" id="shSave">Uložiť</button></div>';
+  openSheet(html, function(sheet){
+    sheet.querySelector('#shSave').onclick = function(){
+      data.budgetTotal = Number(sheet.querySelector('#fBudget').value)||0;
+      save(); closeSheet(); render(); showToast('Rozpočet uložený');
+    };
+  });
+}
+
+function openExpenseSheet(id){
+  var exp = id ? data.expenses.find(function(e){return e.id===id;}) : {id:uid(), name:'', amount:'', categoryId:data.categories[0]?data.categories[0].id:'', date:''};
+  var catOptions = data.categories.map(function(c){return '<option value="'+c.id+'" '+(c.id===exp.categoryId?'selected':'')+'>'+esc(c.name)+'</option>';}).join('');
+  var html = '<div class="sheet-close"><button id="shClose">Zavrieť ✕</button></div>' +
+    '<h3 class="serif">'+(id?'Upraviť výdavok':'Nový výdavok')+'</h3>' +
+    '<div class="field"><label>Názov</label><input type="text" id="fName" value="'+esc(exp.name)+'"></div>' +
+    '<div class="field"><label>Suma (€)</label><input type="number" id="fAmount" value="'+esc(exp.amount)+'"></div>' +
+    '<div class="field"><label>Kategória</label><select id="fCat">'+catOptions+'</select></div>' +
+    '<div class="field"><label>Dátum</label><input type="date" id="fDate" value="'+esc(exp.date||'')+'"></div>' +
+    '<div class="sheet-actions"><button class="btn btn-gold btn-block" id="shSave">Uložiť</button></div>' +
+    (id?'<a class="delete-link" id="shDelete">Odstrániť výdavok</a>':'');
+  openSheet(html, function(sheet){
+    sheet.querySelector('#shSave').onclick = function(){
+      exp.name = sheet.querySelector('#fName').value.trim() || 'Bez názvu';
+      exp.amount = Number(sheet.querySelector('#fAmount').value)||0;
+      exp.categoryId = sheet.querySelector('#fCat').value;
+      exp.date = sheet.querySelector('#fDate').value;
+      if(!id) data.expenses.push(exp);
+      save(); closeSheet(); render(); showToast('Výdavok uložený');
+    };
+    if(id){
+      sheet.querySelector('#shDelete').onclick = function(){
+        data.expenses = data.expenses.filter(function(e){return e.id!==id;});
+        save(); closeSheet(); render(); showToast('Výdavok odstránený');
+      };
+    }
+  });
+}
+
+/* ===================== SEATING ===================== */
+function renderSeating(root){
+  root.appendChild(el('<div class="section-title" style="margin-top:4px;"><h2>Zasadací poriadok</h2></div>'));
+  var d = data;
+  var assignedIds = {};
+  d.tables.forEach(function(t){ (t.guestIds||[]).forEach(function(gid){ assignedIds[gid]=true; }); });
+
+  if(d.tables.length===0){
+    root.appendChild(el('<div class="empty"><span class="em-ico">🪑</span><p>Vytvor prvý stôl a začni rozsádzať hostí.</p></div>'));
+  }
+  d.tables.forEach(function(table){
+    var card = el('<div class="table-card"></div>');
+    var head = el('<div style="display:flex;justify-content:space-between;align-items:center;"><h4>'+esc(table.name)+'</h4><button style="font-size:12px;color:var(--ink-soft);">Upraviť ✎</button></div>');
+    head.querySelector('button').onclick = function(){ openTableSheet(table.id); };
+    card.appendChild(head);
+    var occupied = (table.guestIds||[]).length + (table.manualNames||[]).length;
+    card.appendChild(el('<div class="row-sub">'+occupied+' / '+(table.seats||0)+' miest</div>'));
+    var chips = el('<div style="margin-top:8px;"></div>');
+    (table.guestIds||[]).forEach(function(gid){
+      var g = d.guests.find(function(x){return x.id===gid;});
+      if(!g) return;
+      var chip = el('<span class="seat-chip">'+esc(g.name)+' <button>✕</button></span>');
+      chip.querySelector('button').onclick = function(){
+        table.guestIds = table.guestIds.filter(function(x){return x!==gid;});
+        save(); render();
+      };
+      chips.appendChild(chip);
+    });
+    (table.manualNames||[]).forEach(function(name, idx){
+      var chip = el('<span class="seat-chip">'+esc(name)+' <button>✕</button></span>');
+      chip.querySelector('button').onclick = function(){
+        table.manualNames.splice(idx,1);
+        save(); render();
+      };
+      chips.appendChild(chip);
+    });
+    card.appendChild(chips);
+    if(d.guests.length>0){
+      var addRow = el('<div style="margin-top:10px;"><select><option value="">+ Priradiť hosťa zo zoznamu…</option></select></div>');
+      var sel = addRow.querySelector('select');
+      d.guests.forEach(function(g){
+        if((table.guestIds||[]).indexOf(g.id)!==-1) return;
+        sel.appendChild(el('<option value="'+g.id+'">'+esc(g.name)+(assignedIds[g.id]?' (iný stôl)':'')+'</option>'));
+      });
+      sel.onchange = function(){
+        if(!sel.value) return;
+        table.guestIds = table.guestIds || [];
+        table.guestIds.push(sel.value);
+        save(); render();
+      };
+      card.appendChild(addRow);
+    }
+    var nameRow = el('<div style="display:flex;gap:8px;margin-top:10px;">'+
+      '<input type="text" placeholder="+ Napísať meno osoby…" style="flex:1;">'+
+      '<button class="btn btn-outline">Pridať</button></div>');
+    var nameInput = nameRow.querySelector('input');
+    var addNameBtn = nameRow.querySelector('button');
+    function addManualName(){
+      var val = nameInput.value.trim();
+      if(!val) return;
+      table.manualNames = table.manualNames || [];
+      table.manualNames.push(val);
+      save(); render();
+    }
+    addNameBtn.onclick = addManualName;
+    nameInput.onkeydown = function(e){ if(e.key==='Enter'){ e.preventDefault(); addManualName(); } };
+    card.appendChild(nameRow);
+    root.appendChild(card);
+  });
+
+  var unassigned = d.guests.filter(function(g){ return !assignedIds[g.id]; });
+  if(d.guests.length>0){
+    var box = el('<div class="unassigned-box"><div class="row-sub" style="margin-bottom:6px;">Nepriradení hostia ('+unassigned.length+')</div></div>');
+    unassigned.forEach(function(g){
+      box.appendChild(el('<span class="seat-chip">'+esc(g.name)+'</span>'));
+    });
+    root.appendChild(box);
+  }
+
+  var fab = document.getElementById('fabBtn');
+  fab.style.display = 'flex';
+  fab.onclick = function(){ openTableSheet(null); };
+}
+
+function openTableSheet(id){
+  var table = id ? data.tables.find(function(t){return t.id===id;}) : {id:uid(), name:'Stôl '+(data.tables.length+1), seats:8, guestIds:[], manualNames:[]};
+  var html = '<div class="sheet-close"><button id="shClose">Zavrieť ✕</button></div>' +
+    '<h3 class="serif">'+(id?'Upraviť stôl':'Nový stôl')+'</h3>' +
+    '<div class="field"><label>Názov stola</label><input type="text" id="fName" value="'+esc(table.name)+'"></div>' +
+    '<div class="field"><label>Počet miest</label><input type="number" id="fSeats" value="'+esc(table.seats)+'"></div>' +
+    '<div class="sheet-actions"><button class="btn btn-gold btn-block" id="shSave">Uložiť</button></div>' +
+    (id?'<a class="delete-link" id="shDelete">Odstrániť stôl</a>':'');
+  openSheet(html, function(sheet){
+    sheet.querySelector('#shSave').onclick = function(){
+      table.name = sheet.querySelector('#fName').value.trim() || table.name;
+      table.seats = Number(sheet.querySelector('#fSeats').value)||0;
+      if(!id) data.tables.push(table);
+      save(); closeSheet(); render(); showToast('Stôl uložený');
+    };
+    if(id){
+      sheet.querySelector('#shDelete').onclick = function(){
+        data.tables = data.tables.filter(function(t){return t.id!==id;});
+        save(); closeSheet(); render(); showToast('Stôl odstránený');
+      };
+    }
+  });
+}
+
+/* ===================== SETTINGS ===================== */
+function renderSettings(root){
+  root.appendChild(el('<div class="section-title" style="margin-top:4px;"><h2>Nastavenia</h2></div>'));
+
+  var box = el('<div></div>');
+  box.appendChild(el('<div class="field"><label>Mená (zobrazí sa na hlavnej obrazovke)</label></div>'));
+  var namesInput = el('<input type="text" placeholder="Napr. Anna & Peter" value="'+esc(data.names||'')+'">');
+  box.appendChild(namesInput);
+  box.appendChild(el('<div style="height:14px;"></div>'));
+  box.appendChild(el('<div class="field"><label>Dátum svadby</label></div>'));
+  var dateInput = el('<input type="date" value="'+esc(data.weddingDate||'')+'">');
+  box.appendChild(dateInput);
+  box.appendChild(el('<div style="height:16px;"></div>'));
+  var saveBtn = el('<button class="btn btn-gold btn-block">Uložiť</button>');
+  saveBtn.onclick = function(){
+    data.names = namesInput.value.trim();
+    data.weddingDate = dateInput.value;
+    save(); showToast('Uložené'); render();
+  };
+  box.appendChild(saveBtn);
+  root.appendChild(box);
+
+  root.appendChild(el('<div class="section-title"><h2>Vzhľad</h2></div>'));
+  var themeRow = el('<div class="list-row"><div class="row-main"><div class="row-title">Tmavý režim</div><div class="row-sub">Prepni medzi svetlým a tmavým vzhľadom</div></div></div>');
+  var toggle = el('<button class="btn btn-outline">'+(document.documentElement.getAttribute('data-theme')==='dark'?'Zapnutý':'Vypnutý')+'</button>');
+  toggle.onclick = function(){ toggleTheme(); render(); };
+  themeRow.appendChild(toggle);
+  root.appendChild(themeRow);
+
+  root.appendChild(el('<div class="section-title"><h2>Údaje</h2></div>'));
+  var resetBtn = el('<button class="btn btn-outline btn-block" style="color:var(--danger);border-color:var(--danger);">Vymazať všetky údaje</button>');
+  resetBtn.onclick = function(){
+    if(confirm('Naozaj chceš vymazať všetky uložené údaje? Táto akcia sa nedá vrátiť späť.')){
+      data = defaultData(); save(); render(); showToast('Údaje vymazané');
+    }
+  };
+  root.appendChild(resetBtn);
+}
+
+function toggleTheme(){
+  var cur = document.documentElement.getAttribute('data-theme');
+  var next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  data.darkMode = next;
+  save();
+}
+
+/* ===================== GENERIC EDIT SHEET ===================== */
+function openEditSheet(key, id){
+  var cfg = CONFIGS[key];
+  var item = id ? data[key].find(function(x){return x.id===id;}) : {id:uid()};
+  if(!id && key==='notes'){ item.createdAt = new Date().toLocaleDateString('sk-SK'); }
+
+  var fieldsHtml = cfg.fields.map(function(f){
+    var val = item[f.key];
+    var fh = '<div class="field"><label>'+esc(f.label)+'</label>';
+    if(f.type==='text' || f.type==='number'){
+      fh += '<input type="'+f.type+'" data-key="'+f.key+'" placeholder="'+esc(f.placeholder||'')+'" value="'+esc(val==null?'':val)+'">';
+    } else if(f.type==='date'){
+      fh += '<input type="date" data-key="'+f.key+'" value="'+esc(val||'')+'">';
+    } else if(f.type==='textarea'){
+      fh += '<textarea rows="3" data-key="'+f.key+'">'+esc(val||'')+'</textarea>';
+    } else if(f.type==='select'){
+      var opts = '<option value=""></option>' + f.options.map(function(o){return '<option value="'+esc(o)+'" '+(val===o?'selected':'')+'>'+esc(o)+'</option>';}).join('');
+      fh += '<select data-key="'+f.key+'">'+opts+'</select>';
+    } else if(f.type==='checkbox'){
+      fh = '<div class="field field-check"><input type="checkbox" data-key="'+f.key+'" id="chk_'+f.key+'" '+(val?'checked':'')+'><label for="chk_'+f.key+'" style="margin:0;">'+esc(f.label)+'</label>';
+    }
+    fh += '</div>';
+    return fh;
+  }).join('');
+
+  var html = '<div class="sheet-close"><button id="shClose">Zavrieť ✕</button></div>' +
+    '<h3 class="serif">'+(id?'Upraviť':cfg.title)+'</h3>' +
+    fieldsHtml +
+    '<div class="sheet-actions"><button class="btn btn-gold btn-block" id="shSave">Uložiť</button></div>' +
+    (id?'<a class="delete-link" id="shDelete">Odstrániť</a>':'');
+
+  openSheet(html, function(sheet){
+    sheet.querySelector('#shSave').onclick = function(){
+      var ok = true;
+      cfg.fields.forEach(function(f){
+        var input = sheet.querySelector('[data-key="'+f.key+'"]');
+        if(!input) return;
+        var v;
+        if(f.type==='checkbox') v = input.checked;
+        else if(f.type==='number') v = input.value===''? '' : Number(input.value);
+        else v = input.value;
+        if(f.required && !v){ ok = false; input.style.borderColor = 'var(--danger)'; }
+        item[f.key] = v;
+      });
+      if(!ok){ showToast('Vyplň povinné polia'); return; }
+      if(!id) data[key].push(item);
+      save(); closeSheet(); render(); showToast('Uložené');
+    };
+    if(id){
+      sheet.querySelector('#shDelete').onclick = function(){
+        data[key] = data[key].filter(function(x){return x.id!==id;});
+        save(); closeSheet(); render(); showToast('Odstránené');
+      };
+    }
+  });
+}
+
+/* ===================== SHEET / MODAL ===================== */
+function openSheet(html, onMount){
+  var overlay = document.getElementById('overlay');
+  var sheet = document.getElementById('sheet');
+  sheet.innerHTML = html;
+  overlay.classList.add('show');
+  var closeBtn = sheet.querySelector('#shClose');
+  if(closeBtn) closeBtn.onclick = closeSheet;
+  overlay.onclick = function(e){ if(e.target===overlay) closeSheet(); };
+  if(onMount) onMount(sheet);
+}
+function closeSheet(){
+  document.getElementById('overlay').classList.remove('show');
+}
+
+/* ===================== INIT ===================== */
+function initTheme(){
+  if(data.darkMode==='dark' || data.darkMode==='light'){
+    document.documentElement.setAttribute('data-theme', data.darkMode);
+  }
+  document.getElementById('themeToggle').onclick = function(){ toggleTheme(); render(); };
+}
+
+load();
+initTheme();
+render();
+
+})();
+</script>
+</body>
+</html>
