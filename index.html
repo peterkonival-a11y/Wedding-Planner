@@ -1,0 +1,1990 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Naša svadba</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#AD8A4E">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Svadba">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;1,9..144,450&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FBF7F0;
+    --paper:#FFFFFF;
+    --ink:#2A2420;
+    --ink-soft:#6B6058;
+    --gold:#AD8A4E;
+    --gold-deep:#8C6E39;
+    --gold-mist:#EFE3CB;
+    --line:#E7DFCF;
+    --blush:#E9DCD2;
+    --sage:#7C8B6F;
+    --danger:#A6483B;
+    --seat-ok:#3D8A5F;
+    --danger-tint: rgba(166,72,59,0.08);
+    --ok-tint: rgba(61,138,95,0.08);
+    --shadow: 0 1px 0 rgba(42,36,32,0.04);
+    --radius: 2px;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --cream:#1B1714;
+      --paper:#221D19;
+      --ink:#EFE8DD;
+      --ink-soft:#B3A99C;
+      --gold:#D6B876;
+      --gold-deep:#E2C68A;
+      --gold-mist:#3A2F22;
+      --line:#3A322B;
+      --blush:#332924;
+      --sage:#94A186;
+      --danger:#D98A7C;
+      --seat-ok:#7FC79E;
+      --danger-tint: rgba(217,138,124,0.14);
+      --ok-tint: rgba(127,199,158,0.14);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --cream:#1B1714;
+    --paper:#221D19;
+    --ink:#EFE8DD;
+    --ink-soft:#B3A99C;
+    --gold:#D6B876;
+    --gold-deep:#E2C68A;
+    --gold-mist:#3A2F22;
+    --line:#3A322B;
+    --blush:#332924;
+    --sage:#94A186;
+    --danger:#D98A7C;
+    --seat-ok:#7FC79E;
+    --danger-tint: rgba(217,138,124,0.14);
+    --ok-tint: rgba(127,199,158,0.14);
+    color-scheme: dark;
+  }
+
+  /* ---------- Pastel glass color themes (independent of dark/light) ---------- */
+  :root[data-palette]{ --glass-blur:18px !important; }
+  :root[data-palette="rose"]{
+    --cream: radial-gradient(at 15% 15%, #FDE2E4 0%, transparent 55%), radial-gradient(at 85% 10%, #FBC2D9 0%, transparent 50%), radial-gradient(at 50% 100%, #FFF1F5 0%, transparent 60%), linear-gradient(160deg,#FFF6F8,#FCE8EE) !important;
+    --paper: rgba(255,255,255,.55) !important;
+    --ink:#4A2A34 !important; --ink-soft:#8C6572 !important;
+    --gold:#E17FA0 !important; --gold-deep:#C85C82 !important; --gold-mist: rgba(232,130,154,.22) !important;
+    --line: rgba(200,120,140,.3) !important; --blush:#F6DCE3 !important; color-scheme: light !important;
+  }
+  :root[data-palette="sky"]{
+    --cream: radial-gradient(at 15% 15%, #DDEEFB 0%, transparent 55%), radial-gradient(at 85% 10%, #C9E6F5 0%, transparent 50%), radial-gradient(at 50% 100%, #F0FAFF 0%, transparent 60%), linear-gradient(160deg,#F3FAFE,#E4F3FB) !important;
+    --paper: rgba(255,255,255,.55) !important;
+    --ink:#1F3A4A !important; --ink-soft:#5C7A8A !important;
+    --gold:#5B9BD5 !important; --gold-deep:#3E7CB8 !important; --gold-mist: rgba(91,155,213,.2) !important;
+    --line: rgba(91,155,213,.28) !important; --blush:#DCEEF9 !important; color-scheme: light !important;
+  }
+  :root[data-palette="lavender"]{
+    --cream: radial-gradient(at 15% 15%, #ECE3FB 0%, transparent 55%), radial-gradient(at 85% 10%, #DCC9F2 0%, transparent 50%), radial-gradient(at 50% 100%, #F7F2FD 0%, transparent 60%), linear-gradient(160deg,#F9F6FE,#EFE7FA) !important;
+    --paper: rgba(255,255,255,.55) !important;
+    --ink:#332A4A !important; --ink-soft:#6B5F85 !important;
+    --gold:#9B7FD4 !important; --gold-deep:#7A57B8 !important; --gold-mist: rgba(155,127,212,.2) !important;
+    --line: rgba(155,127,212,.28) !important; --blush:#E9E0F7 !important; color-scheme: light !important;
+  }
+  :root[data-palette="mint"]{
+    --cream: radial-gradient(at 15% 15%, #DFF6EA 0%, transparent 55%), radial-gradient(at 85% 10%, #C6EDD9 0%, transparent 50%), radial-gradient(at 50% 100%, #F1FBF5 0%, transparent 60%), linear-gradient(160deg,#F4FCF8,#E4F5EC) !important;
+    --paper: rgba(255,255,255,.55) !important;
+    --ink:#1F3A30 !important; --ink-soft:#5C7A6C !important;
+    --gold:#5FB897 !important; --gold-deep:#3D9575 !important; --gold-mist: rgba(95,184,151,.2) !important;
+    --line: rgba(95,184,151,.28) !important; --blush:#DBF1E6 !important; color-scheme: light !important;
+  }
+  :root[data-palette="peach"]{
+    --cream: radial-gradient(at 15% 15%, #FCEBDB 0%, transparent 55%), radial-gradient(at 85% 10%, #F7D5B3 0%, transparent 50%), radial-gradient(at 50% 100%, #FFF7EE 0%, transparent 60%), linear-gradient(160deg,#FFF9F2,#FBEBDD) !important;
+    --paper: rgba(255,255,255,.55) !important;
+    --ink:#4A3524 !important; --ink-soft:#8A705C !important;
+    --gold:#E39A6B !important; --gold-deep:#C97941 !important; --gold-mist: rgba(227,154,107,.22) !important;
+    --line: rgba(227,154,107,.3) !important; --blush:#F8E4D3 !important; color-scheme: light !important;
+  }
+  :root[data-palette="sun"]{
+    --cream: radial-gradient(at 15% 15%, #FBF3D8 0%, transparent 55%), radial-gradient(at 85% 10%, #F6E4A8 0%, transparent 50%), radial-gradient(at 50% 100%, #FFFBEF 0%, transparent 60%), linear-gradient(160deg,#FFFDF6,#FAF1D9) !important;
+    --paper: rgba(255,255,255,.55) !important;
+    --ink:#4A3F1F !important; --ink-soft:#8A7C55 !important;
+    --gold:#E0B84A !important; --gold-deep:#C79A2A !important; --gold-mist: rgba(224,184,74,.22) !important;
+    --line: rgba(224,184,74,.3) !important; --blush:#F9EFCB !important; color-scheme: light !important;
+  }
+  :root[data-palette] #app{ background:transparent !important; }
+  :root[data-palette] body{ background-attachment:fixed; }
+  :root[data-palette] .topbar, :root[data-palette] .tabbar{
+    background:var(--paper) !important;
+    backdrop-filter:blur(var(--glass-blur,18px)); -webkit-backdrop-filter:blur(var(--glass-blur,18px));
+  }
+  .swatch-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
+  .swatch{
+    width:38px; height:38px; border-radius:50%; border:2px solid transparent; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; font-size:14px; color:#fff;
+    box-shadow:0 1px 3px rgba(0,0,0,.15);
+  }
+  .swatch.active{ border-color:var(--ink); }
+
+  /* ---------- Calendar ---------- */
+  .cal-nav{ display:flex; align-items:center; justify-content:space-between; margin:2px 0 8px; }
+  .cal-nav button{ background:var(--paper); border:1px solid var(--line); border-radius:10px; width:30px; height:30px; font-size:14px; color:var(--ink); }
+  .cal-nav .cal-month-label{ font-weight:600; font-size:14px; }
+  .cal-dow-row{ display:grid; grid-template-columns:repeat(7,1fr); gap:3px; margin-bottom:4px; }
+  .cal-dow-row div{ text-align:center; font-size:10px; color:var(--ink-soft); font-weight:600; }
+  .cal-grid{ display:grid; grid-template-columns:repeat(7,1fr); grid-auto-rows:34px; gap:3px; }
+  .cal-cell{
+    height:34px; border-radius:8px; background:var(--paper); border:1px solid var(--line);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0;
+    padding:1px; cursor:pointer; position:relative; overflow:hidden; box-sizing:border-box;
+  }
+  .cal-cell.empty{ visibility:hidden; }
+  .cal-cell .cal-num{ font-size:11px; font-weight:600; color:var(--ink); line-height:1.1; }
+  .cal-cell .cal-name{ font-size:6.5px; color:var(--ink-soft); text-align:center; line-height:1; max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .cal-cell.today{ border-color:var(--gold-deep); border-width:2px; }
+  .cal-cell.wedding{
+    background:linear-gradient(135deg,var(--gold),var(--gold-deep));
+    border-color:var(--gold-deep); border-width:2px;
+    box-shadow:0 2px 8px rgba(0,0,0,.18);
+  }
+  .cal-cell.wedding .cal-num{ color:#fff; }
+  .cal-cell.wedding .cal-name{ color:rgba(255,255,255,.85); }
+  .cal-cell.wedding .cal-dots span{ background:#fff; }
+  .cal-cell .cal-ring{ position:absolute; top:0; right:1px; font-size:8px; }
+  .cal-cell .cal-dots{ display:flex; gap:2px; position:absolute; bottom:2px; }
+  .cal-cell .cal-dots span{ width:3px; height:3px; border-radius:50%; background:var(--gold-deep); }
+  .day-item{ display:flex; align-items:center; gap:8px; padding:8px 0; border-bottom:1px solid var(--line); }
+  .day-item:last-child{ border-bottom:none; }
+  .day-item .di-ico{ font-size:16px; }
+
+  /* ---------- Guest side overview ---------- */
+  .side-overview{ display:flex; gap:10px; margin-top:4px; }
+  .side-col{ flex:1; background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:10px 12px; min-width:0; }
+  .side-h{ font-size:13px; margin:0 0 6px; color:var(--ink); }
+  .side-col ul, .side-both ul{ list-style:none; padding:0; margin:0; font-size:12px; color:var(--ink-soft); }
+  .side-col li, .side-both li{ padding:3px 0; border-bottom:1px solid var(--line); overflow-wrap:break-word; }
+  .side-col li:last-child, .side-both li:last-child{ border-bottom:none; }
+  .side-empty{ color:var(--ink-soft); font-style:italic; }
+  .side-both{ margin-top:10px; background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:10px 12px; }
+  .side-summary{ margin-top:10px; text-align:center; font-size:13px; font-weight:600; color:var(--ink); background:var(--gold-mist); border-radius:var(--radius); padding:8px; }
+  .seat-chip.child-chip{ background:var(--blush); color:var(--ink); }
+
+  /* ---------- Overview ---------- */
+  .ov-section{ background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:12px 14px; margin-bottom:12px; }
+  .ov-section h4{ margin:0 0 8px; font-size:13.5px; display:flex; align-items:center; gap:6px; }
+  .ov-row{ display:flex; justify-content:space-between; padding:4px 0; font-size:13px; border-bottom:1px solid var(--line); }
+  .ov-row:last-child{ border-bottom:none; }
+  .ov-row .ov-val{ font-weight:600; color:var(--ink); }
+  input[type="range"]{ accent-color:var(--gold-deep); height:4px; }
+
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; padding:0; height:100%;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:15px;
+    line-height:1.5;
+    overscroll-behavior-y:none;
+  }
+  h1,h2,h3,.serif{ font-family:'Fraunces',serif; font-weight:450; color:var(--ink); }
+  button, input, select, textarea{ font-family:inherit; font-size:inherit; color:inherit; }
+  input, select, textarea{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:10px 12px;
+    width:100%;
+    outline:none;
+    backdrop-filter:blur(var(--glass-blur,0px));
+    -webkit-backdrop-filter:blur(var(--glass-blur,0px));
+  }
+  input:focus, select:focus, textarea:focus{ border-color:var(--gold); }
+  button{ cursor:pointer; border:none; background:none; }
+  button:focus-visible, a:focus-visible, [tabindex]:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
+  ::-webkit-scrollbar{ width:0; height:0; }
+
+  #app{ max-width:520px; margin:0 auto; min-height:100vh; display:flex; flex-direction:column; position:relative; background:var(--cream); }
+
+  /* ---------- Top bar ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:20;
+    background:var(--cream);
+    padding:18px 20px 14px;
+    display:flex; align-items:baseline; justify-content:space-between;
+    border-bottom:1px solid var(--line);
+  }
+  .topbar .brand{ font-size:20px; letter-spacing:.2px; }
+  .topbar .brand em{ font-style:normal; color:var(--gold-deep); }
+  .icon-btn{ font-size:18px; padding:6px; line-height:1; color:var(--ink-soft); }
+
+  /* ---------- Content ---------- */
+  #content{ flex:1; padding:14px 18px 90px; }
+  .view{ animation:fadein .18s ease; }
+  @keyframes fadein{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:none;} }
+
+  /* ---------- Hero / dashboard ---------- */
+  .hero{
+    text-align:center;
+    padding:12px 10px 14px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:12px;
+  }
+  .hero .names{ font-size:20px; margin:0 0 4px; }
+  .hero .date{ color:var(--ink-soft); font-size:12px; letter-spacing:.4px; margin-bottom:8px; }
+  .countdown{ display:flex; justify-content:center; gap:22px; margin-top:2px; }
+  .countdown .num{ font-family:'Fraunces',serif; font-size:24px; color:var(--gold-deep); display:block; line-height:1; }
+  .countdown .lbl{ font-size:10px; color:var(--ink-soft); letter-spacing:.3px; }
+
+  .stat-row{ display:flex; gap:8px; margin-bottom:12px; }
+  .stat-card{ flex:1; background:var(--paper); border:1px solid var(--line); padding:9px 8px; border-radius:var(--radius); backdrop-filter:blur(var(--glass-blur,0px)); -webkit-backdrop-filter:blur(var(--glass-blur,0px)); }
+  .stat-card .n{ font-family:'Fraunces',serif; font-size:18px; display:block; }
+  .stat-card .l{ font-size:10px; color:var(--ink-soft); margin-top:1px; }
+  .stat-card .l2{ font-size:9px; color:var(--ink-soft); display:block; margin-top:2px; opacity:.85; }
+
+  .section-title{ display:flex; align-items:baseline; justify-content:space-between; margin:14px 0 8px; }
+  .section-title h2{ font-size:15px; margin:0; }
+  .section-title .link{ font-size:12.5px; color:var(--gold-deep); }
+
+  .task-mini, .list-row{
+    display:flex; align-items:center; gap:12px;
+    padding:12px 0; border-bottom:1px solid var(--line);
+  }
+  .task-mini:last-child, .list-row:last-child{ border-bottom:none; }
+  .checkbox{
+    width:19px; height:19px; border:1.5px solid var(--gold); border-radius:50%;
+    flex:none; display:flex; align-items:center; justify-content:center; color:var(--paper); font-size:11px;
+  }
+  .checkbox.done{ background:var(--gold); }
+  .row-main{ flex:1; min-width:0; }
+  .row-title{ font-size:14.5px; }
+  .row-title.done{ text-decoration:line-through; color:var(--ink-soft); }
+  .row-sub{ font-size:12px; color:var(--ink-soft); margin-top:2px; }
+  .tag{ font-size:10.5px; padding:2px 8px; border-radius:20px; background:var(--gold-mist); color:var(--gold-deep); white-space:nowrap; }
+
+  .empty{ text-align:center; padding:40px 10px; color:var(--ink-soft); }
+  .empty .em-ico{ font-size:28px; display:block; margin-bottom:10px; }
+  .empty p{ margin:0 0 16px; font-size:13.5px; }
+
+  /* ---------- Bottom nav ---------- */
+  .tabbar{
+    position:sticky; bottom:0; z-index:20;
+    display:flex; background:var(--paper); border-top:1px solid var(--line);
+    padding:8px 6px calc(8px + env(safe-area-inset-bottom));
+    backdrop-filter:blur(var(--glass-blur,0px)); -webkit-backdrop-filter:blur(var(--glass-blur,0px));
+  }
+  .tab{
+    flex:1; display:flex; flex-direction:column; align-items:center; gap:3px;
+    padding:6px 2px; color:var(--ink-soft); font-size:10.5px; letter-spacing:.2px;
+  }
+  .tab .ic{ font-size:19px; }
+  .tab.active{ color:var(--gold-deep); }
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:6px;
+    padding:11px 18px; border-radius:var(--radius); font-size:13.5px; font-weight:500;
+  }
+  .btn-gold{ background:var(--gold); color:#fff; }
+  :root[data-theme="dark"] .btn-gold, @media (prefers-color-scheme:dark){ .btn-gold{ color:#221D19; } }
+  .btn-outline{ border:1px solid var(--line); color:var(--ink); }
+  .btn-block{ width:100%; }
+  .fab{
+    position:fixed; z-index:30; right:calc(50% - 260px + 20px); bottom:86px;
+    width:52px; height:52px; border-radius:50%; background:var(--gold); color:#fff;
+    font-size:24px; display:flex; align-items:center; justify-content:center;
+    box-shadow:0 6px 16px rgba(140,110,57,.35);
+  }
+  @media (max-width:560px){ .fab{ right:20px; } }
+
+  /* ---------- List header / add bar ---------- */
+  .list-header{ display:flex; gap:8px; margin-bottom:14px; }
+  .list-header select{ flex:none; width:auto; }
+  .search{ flex:1; }
+
+  /* ---------- Progress ---------- */
+  .progress{ height:6px; background:var(--gold-mist); border-radius:6px; overflow:hidden; }
+  .progress > div{ height:100%; background:var(--gold); }
+
+  /* ---------- Budget ---------- */
+  .budget-hero{ text-align:center; padding:8px 0 24px; }
+  .budget-hero .amt{ font-family:'Fraunces',serif; font-size:32px; }
+  .budget-hero .amt small{ font-size:14px; color:var(--ink-soft); font-family:'Inter',sans-serif; }
+  .cat-row{ padding:14px 0; border-bottom:1px solid var(--line); }
+  .cat-row:last-child{ border-bottom:none; }
+  .cat-top{ display:flex; justify-content:space-between; font-size:13.5px; margin-bottom:8px; }
+  .cat-top .amt-sub{ color:var(--ink-soft); }
+
+  /* ---------- More menu ---------- */
+  .more-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .more-item{
+    background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
+    padding:18px 14px; display:flex; flex-direction:column; gap:8px; text-align:left;
+    backdrop-filter:blur(var(--glass-blur,0px)); -webkit-backdrop-filter:blur(var(--glass-blur,0px));
+  }
+  .more-item .mi-ico{ font-size:20px; }
+  .more-item .mi-t{ font-size:13.5px; }
+
+  /* ---------- Modal ---------- */
+  .overlay{
+    position:fixed; inset:0; background:rgba(20,16,12,.42); z-index:50;
+    display:flex; align-items:flex-end; justify-content:center;
+    opacity:0; pointer-events:none; transition:opacity .18s ease;
+  }
+  .overlay.show{ opacity:1; pointer-events:auto; }
+  .sheet{
+    width:100%; max-width:520px; background:var(--paper);
+    border-radius:16px 16px 0 0; padding:22px 20px calc(22px + env(safe-area-inset-bottom));
+    max-height:86vh; overflow-y:auto;
+    transform:translateY(16px); transition:transform .2s ease;
+    backdrop-filter:blur(var(--glass-blur,0px)); -webkit-backdrop-filter:blur(var(--glass-blur,0px));
+  }
+  .overlay.show .sheet{ transform:translateY(0); }
+  .sheet h3{ margin:0 0 16px; font-size:18px; }
+  .field{ margin-bottom:14px; }
+  .field label{ display:block; font-size:12px; color:var(--ink-soft); margin-bottom:6px; }
+  .field-check{ display:flex; align-items:center; gap:10px; }
+  .field-check input{ width:auto; }
+  .sheet-actions{ display:flex; gap:10px; margin-top:18px; }
+  .sheet-actions .btn{ flex:1; }
+  .sheet-close{ text-align:right; margin-bottom:4px; }
+  .sheet-close button{ color:var(--ink-soft); font-size:13px; }
+  .delete-link{ display:block; text-align:center; margin-top:14px; color:var(--danger); font-size:13px; }
+
+  .toast{
+    position:fixed; left:50%; bottom:96px; transform:translateX(-50%);
+    background:var(--ink); color:var(--cream); padding:10px 18px; border-radius:20px;
+    font-size:13px; z-index:60; opacity:0; transition:opacity .2s ease, transform .2s ease;
+    pointer-events:none;
+  }
+  .toast.show{ opacity:1; }
+
+  /* seating */
+  .table-card{ background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:14px; margin-bottom:12px; backdrop-filter:blur(var(--glass-blur,0px)); -webkit-backdrop-filter:blur(var(--glass-blur,0px)); }
+  .table-card.over{ border-color:var(--danger); border-width:2px; background:var(--danger-tint); }
+  .table-card.ok{ border-color:var(--seat-ok); border-width:2px; background:var(--ok-tint); }
+  .table-card h4{ margin:0 0 4px; font-size:14.5px; font-weight:600; font-family:'Inter',sans-serif; }
+  .seat-chip{ display:inline-flex; align-items:center; gap:6px; background:var(--gold-mist); color:var(--gold-deep); border-radius:20px; padding:5px 10px; font-size:12px; margin:3px 4px 0 0; }
+  .seat-chip button{ color:var(--gold-deep); font-size:13px; line-height:1; }
+  .unassigned-box{ border:1px dashed var(--line); border-radius:var(--radius); padding:12px; margin-top:16px; }
+
+  a{ color:var(--gold-deep); }
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="topbar">
+    <div class="brand serif" id="brandText">Naša <em>svadba</em></div>
+    <button class="icon-btn" id="themeToggle" aria-label="Prepnúť tmavý režim">◐</button>
+  </div>
+  <div id="content"></div>
+  <button class="fab" id="fabBtn" style="display:none;" aria-label="Pridať">+</button>
+  <div class="tabbar" id="tabbar"></div>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="sheet" id="sheet"></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+(function(){
+"use strict";
+
+/* ===================== STATE ===================== */
+var STORE_KEY = "weddingPlannerData_v1";
+var uid = function(){ return Math.random().toString(36).slice(2,10)+Date.now().toString(36); };
+
+var defaultData = function(){ return {
+  weddingDate: "",
+  names: "",
+  budgetTotal: 0,
+  categories: [
+    {id:uid(), key:"venue"},
+    {id:uid(), key:"attire"},
+    {id:uid(), key:"photo"},
+    {id:uid(), key:"flowers"},
+    {id:uid(), key:"music"},
+    {id:uid(), key:"other"}
+  ],
+  expenses: [],
+  tasks: [],
+  guests: [],
+  tables: [],
+  vendors: [],
+  inspirations: [],
+  playlist: [],
+  notes: [],
+  gifts: [],
+  transport: [],
+  reminders: [],
+  events: [],
+  darkMode: null,
+  palette: "",
+  lang: "sk",
+  cateringChildRatio: 50,
+  cateringPricePerUnit: ""
+};};
+
+var data = null;
+
+function load(){
+  try{
+    var raw = localStorage.getItem(STORE_KEY);
+    data = raw ? JSON.parse(raw) : defaultData();
+  }catch(e){ data = defaultData(); }
+  var def = defaultData();
+  for(var k in def){ if(!(k in data)) data[k] = def[k]; }
+}
+function save(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(data)); }catch(e){}
+}
+
+/* ===================== I18N ===================== */
+var LANG = "sk";
+
+var UI = {
+  sk:{
+    themeToggleAria:"Prepnúť tmavý režim", fabAria:"Pridať", langToggleAria:"Prepnúť jazyk",
+    brandPrefix:"Naša", brandSuffix:"svadba",
+    tabHome:"Domov", tabTasks:"Úlohy", tabGuests:"Hostia", tabBudget:"Rozpočet", tabMore:"Viac",
+    miCalendar:"Kalendár a harmonogram", miSeating:"Zasadací poriadok", miVendors:"Dodávatelia",
+    miInspirations:"Inšpirácie", miPlaylist:"Playlist", miNotes:"Poznámky", miGifts:"Darčeky",
+    miTransport:"Doprava a ubytovanie", miReminders:"Pripomienky", miSettings:"Nastavenia", miExport:"Export do Excelu",
+    miOverview:"Prehľad", miGuests:"Hostia", miTasks:"Úlohy",
+    ovGuestEntries:"Počet záznamov hostí", ovTotalHeadcount:"Celkový počet ľudí", ovConfirmed:"Potvrdení",
+    ovPending:"Čaká sa", ovDeclined:"Nepríde", ovPeople:"ľudí", ovAccommodation:"Ubytovanie potrebné",
+    ovGuestsWord:"hostí", ovDone:"Hotové", ovTables:"Počet stolov", ovSeated:"Obsadené miesta",
+    ovTotal:"Celkovo", ovBooked:"Dohodnuté", ovOther:"Ostatné",
+    cateringTitle:"Kalkulačka cateringu", cateringAdults:"Dospelí (potvrdení)", cateringChildren:"Deti (potvrdené)",
+    cateringChildPortion:"Detská porcia", cateringPricePerUnit:"Cena za jednotku (€)",
+    cateringTotalUnits:"Spolu stravovacích jednotiek", cateringEstCost:"Odhadovaná cena cateringu",
+    defaultNames:"Naša svadba", setDatePrompt:"Nastav dátum svadby v Nastaveniach",
+    daysToGo:"DNÍ DO SVADBY", congrats:"Gratulujeme k svadbe!",
+    tasksDone:"Úlohy hotové", guestsConfirmed:"Potvrdení hostia", spentOfBudget:"Minuté z rozpočtu",
+    upcomingTasks:"Najbližšie úlohy", allArrow:"Všetky →", noOpenTasks:"Žiadne otvorené úlohy. Skvelá práca!",
+    quickAccess:"Rýchly prístup",
+    close:"Zavrieť ✕", edit:"Upraviť", save:"Uložiť", delete:"Odstrániť", fillRequired:"Vyplň povinné polia",
+    saved:"Uložené", deleted:"Odstránené", thanked:"Poďakované",
+    spentTotal:"Minuté / Celkový rozpočet", remaining:"Zostáva ", editTotalBudget:"Upraviť celkový rozpočet",
+    categories:"Kategórie", expenses:"Výdavky", noExpenses:"Zatiaľ žiadne výdavky.",
+    addCategory:"+ Pridať kategóriu", newCategoryPlaceholder:"napr. Kvetinárstvo",
+    totalBudgetTitle:"Celkový rozpočet", amountLabel:"Suma (€)", budgetSaved:"Rozpočet uložený",
+    newExpense:"Nový výdavok", editExpense:"Upraviť výdavok", nameLabel:"Názov", categoryLabel:"Kategória",
+    dateLabel:"Dátum", expenseSaved:"Výdavok uložený", deleteExpense:"Odstrániť výdavok",
+    paidLabel:"Uhradené", unpaidLabel:"Neuhradené",
+    expenseDeleted:"Výdavok odstránený", untitled:"Bez názvu",
+    reminderSetFor:"Pripomienka nastavená na", atTime:"o",
+    seatingTitle:"Zasadací poriadok", createFirstTable:"Vytvor prvý stôl a začni rozsádzať hostí.",
+    seatingHint:"Hostí priraďuješ k stolu v ich profile (Hostia → otvoriť hosťa → Stôl).",
+    editIcon:"Upraviť ✎", seatsOf:" miest", assignFromList:"+ Priradiť hosťa zo zoznamu…",
+    otherTable:" (iný stôl)", writeNamePlaceholder:"+ Napísať meno osoby…", add:"Pridať",
+    unassignedGuests:"Nepriradení hostia", table:"Stôl ", newTable:"Nový stôl", editTable:"Upraviť stôl",
+    tableName:"Názov stola", seatsCount:"Počet miest", tableSaved:"Stôl uložený",
+    deleteTable:"Odstrániť stôl", tableDeleted:"Stôl odstránený",
+    settingsTitle:"Nastavenia", namesFieldLabel:"Mená (zobrazí sa na hlavnej obrazovke)",
+    namesPlaceholder:"Napr. Anna & Peter", weddingDateLabel:"Dátum svadby",
+    appearance:"Vzhľad", darkMode:"Tmavý režim", darkModeDesc:"Prepni medzi svetlým a tmavým vzhľadom",
+    on:"Zapnutý", off:"Vypnutý", language:"Jazyk", languageDesc:"Prepni medzi slovenčinou a angličtinou",
+    colorTheme:"Farebný motív", colorThemeDesc:"Pastelové presklené (glass) farby na výber",
+    paletteNone:"Predvolená", paletteRose:"Ružová", paletteSky:"Modrá", paletteLavender:"Levanduľová",
+    paletteMint:"Mätová", palettePeach:"Broskyňová", paletteSun:"Slnečná",
+    dataSection:"Údaje", deleteAllData:"Vymazať všetky údaje",
+    confirmDeleteAll:"Naozaj chceš vymazať všetky uložené údaje? Táto akcia sa nedá vrátiť späť.",
+    confirmDeleteAll2:"Toto je posledné varovanie – všetky úlohy, hostia, rozpočet aj ostatné dáta sa natrvalo vymažú. Naozaj pokračovať?",
+    cancel:"Zrušiť", yesDelete:"Áno, vymazať",
+    dataDeleted:"Údaje vymazané",
+    exportNoLibrary:"Export potrebuje internetové pripojenie (načíta sa pri prvom použití), skús to prosím znova.",
+    exportDone:"Export stiahnutý",
+    monthNames:["Január","Február","Marec","Apríl","Máj","Jún","Júl","August","September","Október","November","December"],
+    weekdayShort:["Po","Ut","St","Št","Pi","So","Ne"],
+    today:"Dnes", nameDayLabel:"Meniny má", addReminderForDay:"+ Pridať pripomienku na tento deň",
+    scheduleLink:"📋 Harmonogram svadobného dňa", noItemsThisDay:"Na tento deň nemáš nič naplánované.",
+    weddingDayLabel:"Deň svadby 💍", noTable:"— žiadny stôl —",
+    childName:"Meno dieťaťa", sameAsGuestTable:"— rovnaký stôl ako hosť —", childGeneric:"Dieťa",
+    sideTotalLabel:"Spolu"
+  },
+  en:{
+    themeToggleAria:"Toggle dark mode", fabAria:"Add", langToggleAria:"Switch language",
+    brandPrefix:"Our", brandSuffix:"wedding",
+    tabHome:"Home", tabTasks:"Tasks", tabGuests:"Guests", tabBudget:"Budget", tabMore:"More",
+    miCalendar:"Calendar & schedule", miSeating:"Seating chart", miVendors:"Vendors",
+    miInspirations:"Inspiration", miPlaylist:"Playlist", miNotes:"Notes", miGifts:"Gifts",
+    miTransport:"Transport & lodging", miReminders:"Reminders", miSettings:"Settings", miExport:"Export to Excel",
+    miOverview:"Overview", miGuests:"Guests", miTasks:"Tasks",
+    ovGuestEntries:"Guest entries", ovTotalHeadcount:"Total people", ovConfirmed:"Confirmed",
+    ovPending:"Pending", ovDeclined:"Not attending", ovPeople:"people", ovAccommodation:"Needs accommodation",
+    ovGuestsWord:"guests", ovDone:"Done", ovTables:"Number of tables", ovSeated:"Seats filled",
+    ovTotal:"Total", ovBooked:"Booked", ovOther:"Other",
+    cateringTitle:"Catering calculator", cateringAdults:"Adults (confirmed)", cateringChildren:"Children (confirmed)",
+    cateringChildPortion:"Child portion", cateringPricePerUnit:"Price per unit (€)",
+    cateringTotalUnits:"Total catering units", cateringEstCost:"Estimated catering cost",
+    defaultNames:"Our wedding", setDatePrompt:"Set your wedding date in Settings",
+    daysToGo:"DAYS TO GO", congrats:"Congratulations on your wedding!",
+    tasksDone:"Tasks done", guestsConfirmed:"Confirmed guests", spentOfBudget:"Spent of budget",
+    upcomingTasks:"Upcoming tasks", allArrow:"All →", noOpenTasks:"No open tasks. Great job!",
+    quickAccess:"Quick access",
+    close:"Close ✕", edit:"Edit", save:"Save", delete:"Delete", fillRequired:"Please fill in required fields",
+    saved:"Saved", deleted:"Deleted", thanked:"Thanked",
+    spentTotal:"Spent / Total budget", remaining:"Remaining ", editTotalBudget:"Edit total budget",
+    categories:"Categories", expenses:"Expenses", noExpenses:"No expenses yet.",
+    addCategory:"+ Add category", newCategoryPlaceholder:"e.g. Florist",
+    totalBudgetTitle:"Total budget", amountLabel:"Amount (€)", budgetSaved:"Budget saved",
+    newExpense:"New expense", editExpense:"Edit expense", nameLabel:"Name", categoryLabel:"Category",
+    dateLabel:"Date", expenseSaved:"Expense saved", deleteExpense:"Delete expense",
+    paidLabel:"Paid", unpaidLabel:"Unpaid",
+    expenseDeleted:"Expense deleted", untitled:"Untitled",
+    reminderSetFor:"Reminder set for", atTime:"at",
+    seatingTitle:"Seating chart", createFirstTable:"Create your first table and start seating guests.",
+    seatingHint:"Assign guests to a table from their own profile (Guests → open guest → Table).",
+    editIcon:"Edit ✎", seatsOf:" seats", assignFromList:"+ Assign a guest from the list…",
+    otherTable:" (other table)", writeNamePlaceholder:"+ Type a person's name…", add:"Add",
+    unassignedGuests:"Unassigned guests", table:"Table ", newTable:"New table", editTable:"Edit table",
+    tableName:"Table name", seatsCount:"Number of seats", tableSaved:"Table saved",
+    deleteTable:"Delete table", tableDeleted:"Table deleted",
+    settingsTitle:"Settings", namesFieldLabel:"Names (shown on the home screen)",
+    namesPlaceholder:"E.g. Anna & Peter", weddingDateLabel:"Wedding date",
+    appearance:"Appearance", darkMode:"Dark mode", darkModeDesc:"Switch between light and dark appearance",
+    on:"On", off:"Off", language:"Language", languageDesc:"Switch between Slovak and English",
+    colorTheme:"Color theme", colorThemeDesc:"Pastel glass color themes to choose from",
+    paletteNone:"Default", paletteRose:"Rose", paletteSky:"Sky blue", paletteLavender:"Lavender",
+    paletteMint:"Mint", palettePeach:"Peach", paletteSun:"Sunny",
+    dataSection:"Data", deleteAllData:"Delete all data",
+    confirmDeleteAll:"Are you sure you want to delete all saved data? This cannot be undone.",
+    confirmDeleteAll2:"This is your final warning – all tasks, guests, budget and other data will be permanently deleted. Continue?",
+    cancel:"Cancel", yesDelete:"Yes, delete",
+    dataDeleted:"Data deleted",
+    exportNoLibrary:"Export needs an internet connection (loads on first use) — please try again.",
+    exportDone:"Export downloaded",
+    monthNames:["January","February","March","April","May","June","July","August","September","October","November","December"],
+    weekdayShort:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
+    today:"Today", nameDayLabel:"Name day", addReminderForDay:"+ Add a reminder for this day",
+    scheduleLink:"📋 Wedding day schedule", noItemsThisDay:"Nothing planned for this day.",
+    weddingDayLabel:"Wedding day 💍", noTable:"— No table —",
+    childName:"Child's name", sameAsGuestTable:"— Same table as guest —", childGeneric:"Child",
+    sideTotalLabel:"Total"
+  }
+};
+function t(key){ return (UI[LANG] && UI[LANG][key]!=null) ? UI[LANG][key] : (UI.sk[key]!=null?UI.sk[key]:key); }
+
+var CAT_NAMES = {
+  sk:{venue:"Sála a catering", attire:"Šaty a oblek", photo:"Fotograf/kameraman", flowers:"Kvety a výzdoba", music:"Hudba/DJ", other:"Ostatné"},
+  en:{venue:"Venue & catering", attire:"Attire", photo:"Photographer/videographer", flowers:"Flowers & decor", music:"Music/DJ", other:"Other"}
+};
+function catName(cat){
+  if(cat.key && CAT_NAMES[LANG] && CAT_NAMES[LANG][cat.key]) return CAT_NAMES[LANG][cat.key];
+  return cat.name || "";
+}
+
+/* Slovenský kalendár menín (mesiac -> pole mien podľa dňa, null = deň bez mena) */
+var MENINY = [
+  null,
+  ["—","Alexandra, Sandra a Karina","Daniela","Drahoslav","Andrea a Artur","Antónia","Bohuslava a Atila","Severín","Alexej, Alex a Alexia","Daša","Malvína","Ernest a Ernestína","Rastislav","Radovan a Radovana","Dobroslav a Dobroslava","Kristína","Nataša","Bohdana","Mário, Sára a Zara","Dalibor, Sebastián a Fabián","Vincent","Zora, Zoran a Auróra","Miloš","Timotej, Timon a Tímea","Gejza","Tamara","Bohuš","Alfonz","Gašpar","Ema","Emil"],
+  ["Tatiana a Táňa","Erich, Erik a Erika","Blažej","Veronika","Agáta","Dorota","Vanda","Zoja","Zdeno, Zdenko a Ronald","Gabriela","Dezider","Perla","Arpád","Valentín","Pravoslav","Ida a Liana","Miloslava","Jaromír a Jaromíra","Vlasta","Lívia a Aladár","Eleonóra","Etela","Roman a Romana","Matej, Matiáš a Matias","Frederik a Frederika","Viktor","Alexander","Zlatica","Radomír"],
+  ["Albín","Anežka","Bohumil a Bohumila","Kazimír","Fridrich","Radoslav a Radoslava","Tomáš","Alan a Alana","Františka","Branislav, Bronislav a Bruno","Angela a Angelika","Gregor","Vlastimil a Letícia","Matilda","Svetlana","Boleslav","Ľubica","Eduard","Jozef","Víťazoslav","Blahoslav","Beňadik a Benedikt","Adrián","Gabriel","Marián","Emanuel","Alena","Soňa","Miroslav","Vieroslava","Benjamín"],
+  ["Hugo","Zita","Richard","Izidor","Miroslava","Irena","Zoltán","Albert","Milena","Igor","Július","Estera","Aleš","Justín a Justína","Fedor","Dana a Danica","Rudolf","Valér","Jela","Marcel","Ervín","Slavomír","Vojtech","Juraj","Marek, Marko a Markus","Jaroslava","Jaroslav","Jarmila","Leo a Lea","Anastázia"],
+  ["—","Žigmund","Galina","Florián","Lesana a Lesia","Hermína","Monika","Ingrida","Roland","Viktória","Blažena","Pankrác","Servác","Bonifác","Žofia a Sofia","Svetozár","Gizela","Viola","Gertrúda","Bernard","Zina","Júlia, Juliána a Rita","Želmíra","Ela a Vanesa","Urban","Dušan","Iveta","Viliam","Vilma","Ferdinand","Petrana, Petronela a Nela"],
+  ["Žaneta","Oxana a Xénia","Karolína a Kevin","Lenka","Laura","Norbert","Róbert","Medard","Stanislava","Margaréta a Gréta","Jesika","Zlatko","Anton","Vasil","Vít","Bianka a Blanka","Adolf","Vratislav","Alfréd","Valéria","Alojz","Paulína, Paula a Pavla","Sidónia","Ján","Olívia a Tadeáš","Adriána","Ladislav a Ladislava","Beáta","Peter, Pavol a Petra","Melánia"],
+  ["Diana","Berta","Miloslav","Prokop","Cyril a Metod","Patrik a Patrícia","Oliver","Ivan","Lujza","Amália","Milota","Nina","Margita","Kamil a Lara","Henrich","Drahomír a Drahomíra","Bohuslav","Kamila","Šarlota a Dušana","Eliáš, Iľja a Eliána","Daniel","Magdaléna","Oľga","Vladimír","Jakub a Timur","Anna, Hana a Aneta","Božena","Krištof","Marta","Libuša","Ignác"],
+  ["Božidara","Gustáv","Jerguš","Dominik a Dominika","Hortenzia","Jozefína","Štefánia","Oskar","Ľubomíra","Vavrinec","Zuzana","Darina, Dárius a Dária","Ľubomír","Mojmír","Marcela","Leonard","Milica","Elena a Helena","Lýdia","Anabela a Bela","Jana, Johana a Noema","Tichomír","Filip","Bartolomej","Ľudovít","Samuel","Silvia","Augustín","Nikola, Nikolaj a Nikoleta","Ružena","Nora"],
+  ["Drahoslava","Linda a Rebeka","Belo","Rozália","Regína","Alica","Marianna","Miriama","Martina","Oleg","Bystrík","Mária a Mia","Ctibor, Tobiáš a Tobias","Ľudomil a Radka","Jolana","Ľudmila","Olympia a Melisa","Eugénia","Konštantín","Ľuboslav a Ľuboslava","Matúš","Móric","Zdenka","Ľubor a Ľuboš","Vladislav","Edita","Cyprián a Damián","Václav","Michal, Michael a Michaela","Jarolím"],
+  ["Arnold","Levoslav","Stela","František","Viera","Natália","Eliška a Elisa","Brigita","Dionýz","Slavomíra","Valentína","Maximilián, Maxim a Max","Koloman","Boris","Terézia a Tereza","Vladimíra","Hedviga","Lukáš","Kristián","Vendelín","Uršuľa","Sergej","Alojzia","Kvetoslava","Aurel","Demeter","Sabína","Dobromila","Klára a Kiara","Šimon, Simon a Simona","Aurélia"],
+  ["Denis a Denisa","—","Hubert","Karol","Imrich","Renáta","René","Bohumír","Teodor a Teo","Tibor","Martin a Maroš","Svätopluk a Jonáš","Stanislav","Irma","Leopold","Agnesa","Klaudia","Eugen","Alžbeta a Liliana","Félix","Elvíra","Cecília","Klement","Emília","Katarína","Kornel","Milan","Henrieta","Vratko","Andrej, Ondrej a Andreas"],
+  ["Edmund","Bibiána a Viviána","Oldrich","Barbora a Barbara","Oto","Mikuláš a Nikolas","Ambróz","Marína","Izabela","Radúz","Hilda","Otília","Lucia","Branislava a Bronislava","Ivica","Albína","Kornélia","Sláva a Slávka","Judita","Dagmara","Bohdan a Noel","Adela","Nadežda a Naďa","Adam a Eva","—","Štefan","Filoména","Ivana a Ivona","Milada a Nátan","Dávid","Silvester"]
+];
+function nameDayFor(month, day){
+  var arr = MENINY[month];
+  if(!arr) return null;
+  var v = arr[day-1];
+  return (!v || v==='—') ? null : v;
+}
+
+var CFG_TEXT = {
+  sk:{
+    tasks:{title:"Nová úloha", empty:"Zatiaľ žiadne úlohy. Pridaj prvú vec, ktorú treba vybaviť.",
+      f:{title:{label:"Názov úlohy", placeholder:"Napr. Objednať kvety"},
+         category:{label:"Kategória", options:['Sála','Šaty','Fotograf','Kvety','Hudba','Doklady','Ostatné']},
+         dueDate:{label:"Termín"}}},
+    guests:{title:"Nový hosť", empty:"Zoznam hostí je zatiaľ prázdny.",
+      f:{name:{label:"Meno a priezvisko"},
+         side:{label:"Strana", options:['Nevesta','Ženích','Spoločné']},
+         rsvp:{label:"RSVP", options:['Čaká sa','Príde','Nepríde']},
+         seatTable:{label:"Stôl (zasadací poriadok)"},
+         partnerName:{label:"Meno partnera/-ky (ak ide o pár)", placeholder:"napr. Peter Novák"},
+         children:{label:"Počet detí"},
+         menu:{label:"Menu / poznámka (napr. diéta, alergie)"},
+         accommodation:{label:"Ubytovanie potrebné"},
+         notes:{label:"Poznámka"}}},
+    vendors:{title:"Nový dodávateľ", empty:"Zatiaľ žiadni dodávatelia. Pridaj fotografa, DJ-a, kvetinárstvo…",
+      f:{name:{label:"Názov / meno"},
+         category:{label:"Kategória", options:['Sála','Catering','Fotograf','Kameraman','DJ/Kapela','Kvety','Torta','Šaty','Oblek','Doprava','Ostatné']},
+         phone:{label:"Telefón"}, price:{label:"Cena (€)"},
+         status:{label:"Stav", options:['Oslovený','Dohodnuté','Zaplatené']},
+         notes:{label:"Poznámka"}}},
+    inspirations:{title:"Nová inšpirácia", empty:"Zbieraj nápady na výzdobu, šaty či torty.",
+      f:{title:{label:"Názov"},
+         category:{label:"Kategória", options:['Výzdoba','Šaty','Účes/mejkap','Torta','Kytica','Ostatné']},
+         url:{label:"Odkaz (URL)"}, notes:{label:"Poznámka"}}},
+    playlist:{title:"Nová pieseň", empty:"Vytvor si playlist na svadbu.",
+      f:{title:{label:"Názov piesne"}, artist:{label:"Interpret"},
+         moment:{label:"Moment", options:['Príchod','Prvý tanec','Zábava','Posledná pieseň','Ostatné']}}},
+    notes:{title:"Nová poznámka", empty:"Zapíš si nápady a dôležité veci.",
+      f:{text:{label:"Poznámka"}}},
+    gifts:{title:"Nový darček", empty:"Sleduj darčeky a poďakovania.",
+      f:{from:{label:"Od koho"}, item:{label:"Darček"}, thanked:{label:"Poďakované"}}},
+    transport:{title:"Nová položka dopravy", empty:"Naplánuj dopravu a ubytovanie pre hostí.",
+      f:{title:{label:"Názov", placeholder:"Napr. Autobus pre hostí / Hotel Rezidencia"},
+         type:{label:"Typ", options:['Doprava','Ubytovanie']},
+         date:{label:"Dátum"}, time:{label:"Čas"}, notes:{label:"Poznámka"}}},
+    reminders:{title:"Nová pripomienka", empty:"Nastav si pripomienky na dôležité termíny.",
+      f:{text:{label:"Text pripomienky"}, date:{label:"Dátum"}, time:{label:"Čas"}}},
+    events:{title:"Nová položka harmonogramu", empty:"Naplánuj harmonogram svadobného dňa.",
+      f:{title:{label:"Názov", placeholder:"Napr. Obrad, Príchod hostí…"},
+         date:{label:"Dátum"}, time:{label:"Čas", placeholder:"napr. 14:30"}}},
+    listTitles:{tasks:"Úlohy", guests:"Hostia", vendors:"Dodávatelia", inspirations:"Inšpirácie",
+      playlist:"Playlist", notes:"Poznámky", gifts:"Darčeky", transport:"Doprava a ubytovanie",
+      reminders:"Pripomienky", events:"Kalendár a harmonogram"}
+  },
+  en:{
+    tasks:{title:"New task", empty:"No tasks yet. Add the first thing to take care of.",
+      f:{title:{label:"Task name", placeholder:"E.g. Order flowers"},
+         category:{label:"Category", options:['Venue','Attire','Photographer','Flowers','Music','Documents','Other']},
+         dueDate:{label:"Due date"}}},
+    guests:{title:"New guest", empty:"Guest list is empty for now.",
+      f:{name:{label:"Full name"},
+         side:{label:"Side", options:['Bride','Groom','Both']},
+         rsvp:{label:"RSVP", options:['Pending','Attending','Not attending']},
+         seatTable:{label:"Table (seating chart)"},
+         partnerName:{label:"Partner's name (if a couple)", placeholder:"e.g. Peter Novak"},
+         children:{label:"Number of children"},
+         menu:{label:"Menu / note (e.g. diet, allergies)"},
+         accommodation:{label:"Needs accommodation"},
+         notes:{label:"Note"}}},
+    vendors:{title:"New vendor", empty:"No vendors yet. Add a photographer, DJ, florist…",
+      f:{name:{label:"Name"},
+         category:{label:"Category", options:['Venue','Catering','Photographer','Videographer','DJ/Band','Flowers','Cake','Dress','Suit','Transport','Other']},
+         phone:{label:"Phone"}, price:{label:"Price (€)"},
+         status:{label:"Status", options:['Contacted','Booked','Paid']},
+         notes:{label:"Note"}}},
+    inspirations:{title:"New inspiration", empty:"Collect ideas for decor, dresses, cakes…",
+      f:{title:{label:"Title"},
+         category:{label:"Category", options:['Decor','Dress','Hair/makeup','Cake','Bouquet','Other']},
+         url:{label:"Link (URL)"}, notes:{label:"Note"}}},
+    playlist:{title:"New song", empty:"Build your wedding playlist.",
+      f:{title:{label:"Song title"}, artist:{label:"Artist"},
+         moment:{label:"Moment", options:['Arrival','First dance','Party','Last song','Other']}}},
+    notes:{title:"New note", empty:"Jot down ideas and important things.",
+      f:{text:{label:"Note"}}},
+    gifts:{title:"New gift", empty:"Track gifts and thank-yous.",
+      f:{from:{label:"From"}, item:{label:"Gift"}, thanked:{label:"Thanked"}}},
+    transport:{title:"New transport item", empty:"Plan transport and accommodation for guests.",
+      f:{title:{label:"Title", placeholder:"E.g. Guest bus / Hotel Residence"},
+         type:{label:"Type", options:['Transport','Accommodation']},
+         date:{label:"Date"}, time:{label:"Time"}, notes:{label:"Note"}}},
+    reminders:{title:"New reminder", empty:"Set reminders for important deadlines.",
+      f:{text:{label:"Reminder text"}, date:{label:"Date"}, time:{label:"Time"}}},
+    events:{title:"New schedule item", empty:"Plan the schedule for your wedding day.",
+      f:{title:{label:"Title", placeholder:"E.g. Ceremony, Guest arrival…"},
+         date:{label:"Date"}, time:{label:"Time", placeholder:"e.g. 14:30"}}},
+    listTitles:{tasks:"Tasks", guests:"Guests", vendors:"Vendors", inspirations:"Inspiration",
+      playlist:"Playlist", notes:"Notes", gifts:"Gifts", transport:"Transport & lodging",
+      reminders:"Reminders", events:"Calendar & schedule"}
+  }
+};
+
+/* ===================== HELPERS ===================== */
+function el(html){ var tpl=document.createElement('template'); tpl.innerHTML=html.trim(); return tpl.content.firstChild; }
+function fmtMoney(n){ n = Number(n)||0; return n.toLocaleString(LANG==='en'?'en-GB':'sk-SK',{maximumFractionDigits:0}) + " €"; }
+function fmtDate(d){
+  if(!d) return "";
+  var dt = new Date(d+"T00:00:00");
+  if(isNaN(dt)) return d;
+  return dt.toLocaleDateString(LANG==='en'?'en-GB':'sk-SK',{day:'numeric',month:'long',year:'numeric'});
+}
+function fmtDateShort(d){
+  if(!d) return "";
+  var dt = new Date(d+"T00:00:00");
+  if(isNaN(dt)) return d;
+  return dt.toLocaleDateString(LANG==='en'?'en-GB':'sk-SK',{day:'numeric',month:'short'});
+}
+function showToast(msg, duration){
+  var elToast = document.getElementById('toast');
+  elToast.textContent = msg;
+  elToast.classList.add('show');
+  clearTimeout(showToast._h);
+  showToast._h = setTimeout(function(){ elToast.classList.remove('show'); }, duration||1800);
+}
+function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+
+/* ===================== NAV ===================== */
+function getTabs(){ return [
+  {id:'home', label:t('tabHome'), icon:'🏠'},
+  {id:'tasks', label:t('tabTasks'), icon:'✅'},
+  {id:'guests', label:t('tabGuests'), icon:'👥'},
+  {id:'budget', label:t('tabBudget'), icon:'💰'},
+  {id:'more', label:t('tabMore'), icon:'⋯'}
+]; }
+function getMoreItems(){ return [
+  {id:'overview', label:t('miOverview'), icon:'📊'},
+  {id:'seating', label:t('miSeating'), icon:'🪑'},
+  {id:'inspirations', label:t('miInspirations'), icon:'📸'},
+  {id:'playlist', label:t('miPlaylist'), icon:'🎵'},
+  {id:'notes', label:t('miNotes'), icon:'📝'},
+  {id:'gifts', label:t('miGifts'), icon:'🎁'},
+  {id:'transport', label:t('miTransport'), icon:'🚗'},
+  {id:'reminders', label:t('miReminders'), icon:'🔔'},
+  {id:'export', label:t('miExport'), icon:'📤'},
+  {id:'settings', label:t('miSettings'), icon:'⚙️'}
+]; }
+var state = { view:'home' };
+
+function goto(view){
+  state.view = view;
+  render();
+  document.getElementById('content').scrollTop = 0;
+  window.scrollTo(0,0);
+}
+
+/* ===================== GENERIC LIST CONFIG ===================== */
+/* Each config: fields for the add/edit sheet, and a render function for list rows */
+var CONFIGS = {};
+
+function buildConfigs(){
+  var L = CFG_TEXT[LANG];
+
+  CONFIGS.tasks = {
+    title:L.tasks.title, empty:{ico:'✅', text:L.tasks.empty},
+    fields:[
+      {key:'title', label:L.tasks.f.title.label, type:'text', required:true, placeholder:L.tasks.f.title.placeholder},
+      {key:'category', label:L.tasks.f.category.label, type:'select', options:L.tasks.f.category.options},
+      {key:'dueDate', label:L.tasks.f.dueDate.label, type:'date'}
+    ],
+    sort:function(a,b){
+      if(!!a.done !== !!b.done) return a.done ? 1 : -1;
+      return (a.dueDate||'9999').localeCompare(b.dueDate||'9999');
+    },
+    rowHtml:function(item){
+      var sub = [item.category, item.dueDate?fmtDateShort(item.dueDate):''].filter(Boolean).join(' · ');
+      return '<div class="row-main"><div class="row-title '+(item.done?'done':'')+'">'+esc(item.title)+'</div>'+
+        (sub?'<div class="row-sub">'+esc(sub)+'</div>':'')+'</div>';
+    },
+    hasCheckbox:true
+  };
+
+  CONFIGS.guests = {
+    title:L.guests.title, empty:{ico:'👥', text:L.guests.empty},
+    fields:[
+      {key:'name', label:L.guests.f.name.label, type:'text', required:true},
+      {key:'side', label:L.guests.f.side.label, type:'select', options:L.guests.f.side.options},
+      {key:'rsvp', label:L.guests.f.rsvp.label, type:'select', options:L.guests.f.rsvp.options},
+      {key:'seatTable', label:L.guests.f.seatTable.label, type:'guestTable'},
+      {key:'partnerName', label:L.guests.f.partnerName.label, type:'text', placeholder:L.guests.f.partnerName.placeholder},
+      {key:'children', label:L.guests.f.children.label, type:'childrenList'},
+      {key:'menu', label:L.guests.f.menu.label, type:'text'},
+      {key:'accommodation', label:L.guests.f.accommodation.label, type:'checkbox'},
+      {key:'notes', label:L.guests.f.notes.label, type:'textarea'}
+    ],
+    sort:function(a,b){ return (a.name||'').localeCompare(b.name||'', LANG==='en'?'en':'sk'); },
+    rowHtml:function(item){
+      var tableObj = data.tables.find(function(tb){ return (tb.guestIds||[]).indexOf(item.id)!==-1; });
+      var nameLine = item.name + (item.partnerName ? ' & '+item.partnerName : '');
+      var sub = [item.side, item.rsvp, item.menu, tableObj?('🪑 '+tableObj.name):''].filter(Boolean).join(' · ');
+      return '<div class="row-main"><div class="row-title">'+esc(nameLine)+'</div>'+
+        '<div class="row-sub">'+esc(sub)+'</div></div>'+
+        (item.rsvp?'<span class="tag">'+esc(item.rsvp)+'</span>':'');
+    }
+  };
+
+  CONFIGS.vendors = {
+    title:L.vendors.title, empty:{ico:'📞', text:L.vendors.empty},
+    fields:[
+      {key:'name', label:L.vendors.f.name.label, type:'text', required:true},
+      {key:'category', label:L.vendors.f.category.label, type:'select', options:L.vendors.f.category.options},
+      {key:'phone', label:L.vendors.f.phone.label, type:'text'},
+      {key:'price', label:L.vendors.f.price.label, type:'number'},
+      {key:'status', label:L.vendors.f.status.label, type:'select', options:L.vendors.f.status.options},
+      {key:'notes', label:L.vendors.f.notes.label, type:'textarea'}
+    ],
+    sort:function(a,b){ return (a.category||'').localeCompare(b.category||'', LANG==='en'?'en':'sk'); },
+    rowHtml:function(item){
+      var sub = [item.category, item.phone, item.price?fmtMoney(item.price):''].filter(Boolean).join(' · ');
+      return '<div class="row-main"><div class="row-title">'+esc(item.name)+'</div>'+
+        '<div class="row-sub">'+esc(sub)+'</div></div>'+
+        (item.status?'<span class="tag">'+esc(item.status)+'</span>':'');
+    }
+  };
+
+  CONFIGS.inspirations = {
+    title:L.inspirations.title, empty:{ico:'📸', text:L.inspirations.empty},
+    fields:[
+      {key:'title', label:L.inspirations.f.title.label, type:'text', required:true},
+      {key:'category', label:L.inspirations.f.category.label, type:'select', options:L.inspirations.f.category.options},
+      {key:'url', label:L.inspirations.f.url.label, type:'text'},
+      {key:'notes', label:L.inspirations.f.notes.label, type:'textarea'}
+    ],
+    sort:function(a,b){ return 0; },
+    rowHtml:function(item){
+      var sub = [item.category].filter(Boolean).join(' · ');
+      return '<div class="row-main"><div class="row-title">'+esc(item.title)+'</div>'+
+        (sub?'<div class="row-sub">'+esc(sub)+'</div>':'')+
+        (item.url?'<div class="row-sub">🔗 '+esc(item.url)+'</div>':'')+'</div>';
+    }
+  };
+
+  CONFIGS.playlist = {
+    title:L.playlist.title, empty:{ico:'🎵', text:L.playlist.empty},
+    fields:[
+      {key:'title', label:L.playlist.f.title.label, type:'text', required:true},
+      {key:'artist', label:L.playlist.f.artist.label, type:'text'},
+      {key:'moment', label:L.playlist.f.moment.label, type:'select', options:L.playlist.f.moment.options}
+    ],
+    sort:function(a,b){ return 0; },
+    rowHtml:function(item){
+      var sub = [item.artist, item.moment].filter(Boolean).join(' · ');
+      return '<div class="row-main"><div class="row-title">'+esc(item.title)+'</div>'+
+        (sub?'<div class="row-sub">'+esc(sub)+'</div>':'')+'</div>';
+    }
+  };
+
+  CONFIGS.notes = {
+    title:L.notes.title, empty:{ico:'📝', text:L.notes.empty},
+    fields:[
+      {key:'text', label:L.notes.f.text.label, type:'textarea', required:true}
+    ],
+    sort:function(a,b){ return (b.createdAt||'').localeCompare(a.createdAt||''); },
+    rowHtml:function(item){
+      return '<div class="row-main"><div class="row-title">'+esc(item.text)+'</div>'+
+        (item.createdAt?'<div class="row-sub">'+esc(item.createdAt)+'</div>':'')+'</div>';
+    }
+  };
+
+  CONFIGS.gifts = {
+    title:L.gifts.title, empty:{ico:'🎁', text:L.gifts.empty},
+    fields:[
+      {key:'from', label:L.gifts.f.from.label, type:'text', required:true},
+      {key:'item', label:L.gifts.f.item.label, type:'text'},
+      {key:'thanked', label:L.gifts.f.thanked.label, type:'checkbox'}
+    ],
+    sort:function(a,b){ return (a.from||'').localeCompare(b.from||'', LANG==='en'?'en':'sk'); },
+    rowHtml:function(item){
+      return '<div class="row-main"><div class="row-title">'+esc(item.from)+'</div>'+
+        (item.item?'<div class="row-sub">'+esc(item.item)+'</div>':'')+'</div>'+
+        (item.thanked?'<span class="tag">'+esc(t('thanked'))+'</span>':'');
+    },
+    hasCheckbox:true, checkboxKey:'thanked'
+  };
+
+  CONFIGS.transport = {
+    title:L.transport.title, empty:{ico:'🚗', text:L.transport.empty},
+    fields:[
+      {key:'title', label:L.transport.f.title.label, type:'text', required:true, placeholder:L.transport.f.title.placeholder},
+      {key:'type', label:L.transport.f.type.label, type:'select', options:L.transport.f.type.options},
+      {key:'date', label:L.transport.f.date.label, type:'date'},
+      {key:'time', label:L.transport.f.time.label, type:'text'},
+      {key:'notes', label:L.transport.f.notes.label, type:'textarea'}
+    ],
+    sort:function(a,b){ return (a.date||'').localeCompare(b.date||''); },
+    rowHtml:function(item){
+      var sub = [item.type, item.date?fmtDateShort(item.date):'', item.time].filter(Boolean).join(' · ');
+      return '<div class="row-main"><div class="row-title">'+esc(item.title)+'</div>'+
+        (sub?'<div class="row-sub">'+esc(sub)+'</div>':'')+'</div>';
+    }
+  };
+
+  CONFIGS.reminders = {
+    title:L.reminders.title, empty:{ico:'🔔', text:L.reminders.empty},
+    fields:[
+      {key:'text', label:L.reminders.f.text.label, type:'text', required:true},
+      {key:'date', label:L.reminders.f.date.label, type:'date'},
+      {key:'time', label:L.reminders.f.time.label, type:'time'}
+    ],
+    sort:function(a,b){
+      if(!!a.done !== !!b.done) return a.done ? 1 : -1;
+      var ad = a.date||'9999-99-99', bd = b.date||'9999-99-99';
+      if(ad!==bd) return ad<bd?-1:1;
+      var at = a.time||'99:99', bt = b.time||'99:99';
+      return at<bt?-1:(at>bt?1:0);
+    },
+    rowHtml:function(item){
+      var sub = [item.date?fmtDateShort(item.date):'', item.time].filter(Boolean).join(' · ');
+      return '<div class="row-main"><div class="row-title '+(item.done?'done':'')+'">'+esc(item.text)+'</div>'+
+        (sub?'<div class="row-sub">'+esc(sub)+'</div>':'')+'</div>';
+    },
+    hasCheckbox:true
+  };
+
+  CONFIGS.events = {
+    title:L.events.title, empty:{ico:'📅', text:L.events.empty},
+    fields:[
+      {key:'title', label:L.events.f.title.label, type:'text', required:true, placeholder:L.events.f.title.placeholder},
+      {key:'date', label:L.events.f.date.label, type:'date'},
+      {key:'time', label:L.events.f.time.label, type:'time'}
+    ],
+    sort:function(a,b){
+      var ad = a.date||'9999-99-99', bd = b.date||'9999-99-99';
+      if(ad!==bd) return ad<bd?-1:1;
+      var at = a.time||'99:99', bt = b.time||'99:99';
+      return at<bt?-1:(at>bt?1:0);
+    },
+    rowHtml:function(item){
+      var sub = [item.date?fmtDateShort(item.date):'', item.time].filter(Boolean).join(' · ');
+      return '<div class="row-main"><div class="row-title">'+esc(item.title)+'</div>'+
+        (sub?'<div class="row-sub">'+esc(sub)+'</div>':'')+'</div>';
+    }
+  };
+}
+buildConfigs();
+
+/* ===================== RENDER ROOT ===================== */
+function render(){
+  document.getElementById('themeToggle').setAttribute('aria-label', t('themeToggleAria'));
+  document.getElementById('brandText').innerHTML = esc(t('brandPrefix'))+' <em>'+esc(t('brandSuffix'))+'</em>';
+  document.getElementById('fabBtn').setAttribute('aria-label', t('fabAria'));
+  document.title = data.names ? data.names : t('defaultNames');
+  renderTabbar();
+  var c = document.getElementById('content');
+  c.innerHTML = '';
+  var v = el('<div class="view"></div>');
+  c.appendChild(v);
+
+  var fab = document.getElementById('fabBtn');
+  fab.style.display = 'none';
+  fab.onclick = null;
+
+  if(state.view === 'home') renderHome(v);
+  else if(state.view === 'budget') renderBudget(v);
+  else if(state.view === 'seating') renderSeating(v);
+  else if(state.view === 'settings') renderSettings(v);
+  else if(state.view === 'more') renderMore(v);
+  else if(state.view === 'calendar') renderCalendar(v);
+  else if(state.view === 'overview') renderOverview(v);
+  else if(CONFIGS[state.view]) renderGenericList(v, state.view);
+  else renderHome(v);
+}
+
+function renderTabbar(){
+  var bar = document.getElementById('tabbar');
+  bar.innerHTML = '';
+  var activeTop = ['home','tasks','guests','budget'].indexOf(state.view) === -1 ? 'more' : state.view;
+  getTabs().forEach(function(tab){
+    var b = el('<button class="tab '+(tab.id===activeTop?'active':'')+'"><span class="ic">'+tab.icon+'</span><span>'+tab.label+'</span></button>');
+    b.onclick = function(){ goto(tab.id); };
+    bar.appendChild(b);
+  });
+}
+
+/* ===================== HOME / DASHBOARD ===================== */
+function renderHome(root){
+  var d = data;
+  var hero = el('<div class="hero"></div>');
+  var namesLine = d.names ? d.names : t('defaultNames');
+  hero.innerHTML = '<h1 class="names serif">'+esc(namesLine)+'</h1>' +
+    '<div class="date">'+(d.weddingDate ? fmtDate(d.weddingDate) : t('setDatePrompt')) +'</div>';
+
+  if(d.weddingDate){
+    var today = new Date(); today.setHours(0,0,0,0);
+    var wd = new Date(d.weddingDate+"T00:00:00");
+    var diff = Math.round((wd-today)/86400000);
+    var cd = el('<div class="countdown"></div>');
+    if(diff >= 0){
+      cd.innerHTML = '<div><span class="num serif">'+diff+'</span><span class="lbl">'+t('daysToGo')+'</span></div>';
+    } else {
+      cd.innerHTML = '<div><span class="num serif">💍</span><span class="lbl">'+t('congrats')+'</span></div>';
+    }
+    hero.appendChild(cd);
+  }
+  root.appendChild(hero);
+
+  var doneTasks = d.tasks.filter(function(x){return x.done;}).length;
+  var totalTasks = d.tasks.length;
+  var confirmedList = d.guests.filter(function(g){return g.rsvp==='Príde' || g.rsvp==='Attending';});
+  var confirmedAdults = confirmedList.reduce(function(s,g){return s+1+(g.partnerName?1:0);},0);
+  var confirmedKids = confirmedList.reduce(function(s,g){ var k=g.childrenList?g.childrenList.length:(Number(g.children)||0); return s+k; },0);
+  var spent = d.expenses.reduce(function(s,e){return s+(Number(e.amount)||0);},0);
+
+  var stats = el('<div class="stat-row"></div>');
+  stats.appendChild(el('<div class="stat-card"><span class="n serif">'+doneTasks+'/'+totalTasks+'</span><span class="l">'+t('tasksDone')+'</span></div>'));
+  stats.appendChild(el('<div class="stat-card"><span class="n serif">'+(confirmedAdults+confirmedKids)+'</span><span class="l">'+t('guestsConfirmed')+'</span><span class="l2">🧑 '+confirmedAdults+' · 👶 '+confirmedKids+'</span></div>'));
+  stats.appendChild(el('<div class="stat-card"><span class="n serif">'+fmtMoney(spent)+'</span><span class="l">'+t('spentOfBudget')+'</span></div>'));
+  root.appendChild(stats);
+
+  // Calendar (name days + reminders) right on the home page
+  var st3 = el('<div class="section-title"><h2>'+t('miCalendar')+'</h2></div>');
+  root.appendChild(st3);
+  renderCalendar(root);
+}
+
+/* ===================== GENERIC LIST VIEW ===================== */
+function guestHeadcount(g){
+  var kids = g.childrenList ? g.childrenList.length : (Number(g.children)||0);
+  return 1 + (g.partnerName ? 1 : 0) + kids;
+}
+
+function renderGuestOverview(root){
+  var guests = data.guests;
+  var sideOpts = CFG_TEXT[LANG].guests.f.side.options; // [bride, groom, both]
+  var brideLabel = sideOpts[0], groomLabel = sideOpts[1], bothLabel = sideOpts[2];
+  var BRIDE_VALS = ['Nevesta','Bride'], GROOM_VALS = ['Ženích','Groom'], BOTH_VALS = ['Spoločné','Both'];
+
+  var bride = guests.filter(function(g){return BRIDE_VALS.indexOf(g.side)!==-1;});
+  var groom = guests.filter(function(g){return GROOM_VALS.indexOf(g.side)!==-1;});
+  var both = guests.filter(function(g){return BOTH_VALS.indexOf(g.side)!==-1;});
+
+  function listHtml(arr){
+    if(arr.length===0) return '<li class="side-empty">—</li>';
+    return arr.map(function(g){
+      var kids = g.childrenList ? g.childrenList.length : (Number(g.children)||0);
+      var extra = (g.partnerName ? ' & '+g.partnerName : '') + (kids ? ' +'+kids+'👶' : '');
+      return '<li>'+esc(g.name+extra)+'</li>';
+    }).join('');
+  }
+
+  var wrap = el('<div class="side-overview-wrap"></div>');
+  var cols = el('<div class="side-overview"></div>');
+  cols.appendChild(el('<div class="side-col"><h4 class="side-h">🤵 '+esc(groomLabel)+'</h4><ul>'+listHtml(groom)+'</ul></div>'));
+  cols.appendChild(el('<div class="side-col"><h4 class="side-h">👰 '+esc(brideLabel)+'</h4><ul>'+listHtml(bride)+'</ul></div>'));
+  wrap.appendChild(cols);
+  if(both.length>0){
+    wrap.appendChild(el('<div class="side-both"><h4 class="side-h">🤝 '+esc(bothLabel)+'</h4><ul>'+listHtml(both)+'</ul></div>'));
+  }
+
+  var groomCount = groom.reduce(function(s,g){return s+guestHeadcount(g);},0);
+  var brideCount = bride.reduce(function(s,g){return s+guestHeadcount(g);},0);
+  var bothCount = both.reduce(function(s,g){return s+guestHeadcount(g);},0);
+  var total = groomCount+brideCount+bothCount;
+  var parts = [esc(groomLabel)+': '+groomCount, esc(brideLabel)+': '+brideCount];
+  if(both.length>0) parts.push(esc(bothLabel)+': '+bothCount);
+  parts.push(t('sideTotalLabel')+': '+total);
+  wrap.appendChild(el('<div class="side-summary">'+parts.join(' · ')+'</div>'));
+  root.appendChild(wrap);
+}
+
+function renderGenericList(root, key){
+  var cfg = CONFIGS[key];
+  var items = data[key].slice().sort(cfg.sort);
+
+  var titleMap = CFG_TEXT[LANG].listTitles;
+  root.appendChild(el('<div class="section-title" style="margin-top:4px;"><h2>'+titleMap[key]+'</h2></div>'));
+
+  if(key==='guests' && items.length>0){
+    renderGuestOverview(root);
+  }
+
+  if(items.length===0){
+    root.appendChild(el('<div class="empty"><span class="em-ico">'+cfg.empty.ico+'</span><p>'+cfg.empty.text+'</p></div>'));
+  } else {
+    var wrap = el('<div></div>');
+    items.forEach(function(item){
+      var row;
+      if(cfg.hasCheckbox){
+        var ck = cfg.checkboxKey || 'done';
+        row = el('<div class="list-row"><div class="checkbox '+(item[ck]?'done':'')+'">'+(item[ck]?'✓':'')+'</div></div>');
+        row.querySelector('.checkbox').onclick = function(){ item[ck] = !item[ck]; save(); render(); };
+      } else {
+        row = el('<div class="list-row"></div>');
+      }
+      var rest = el(cfg.rowHtml(item));
+      row.appendChild(rest);
+      row.style.cursor = 'pointer';
+      row.addEventListener('click', function(ev){
+        if(ev.target.closest('.checkbox')) return;
+        openEditSheet(key, item.id);
+      });
+      wrap.appendChild(row);
+    });
+    root.appendChild(wrap);
+  }
+
+  var fab = document.getElementById('fabBtn');
+  fab.style.display = 'flex';
+  fab.onclick = function(){ openEditSheet(key, null); };
+}
+
+/* ===================== MORE MENU ===================== */
+function renderMore(root){
+  root.appendChild(el('<div class="section-title" style="margin-top:4px;"><h2>'+t('tabMore')+'</h2></div>'));
+  var grid = el('<div class="more-grid"></div>');
+  getMoreItems().forEach(function(m){
+    var it = el('<button class="more-item"><span class="mi-ico">'+m.icon+'</span><span class="mi-t">'+m.label+'</span></button>');
+    it.onclick = function(){ if(m.id==='export'){ exportToExcel(); } else { goto(m.id); } };
+    grid.appendChild(it);
+  });
+  root.appendChild(grid);
+}
+
+/* ===================== OVERVIEW ===================== */
+function ovRow(label, val){
+  return '<div class="ov-row"><span>'+label+'</span><span class="ov-val">'+val+'</span></div>';
+}
+
+function renderOverview(root){
+  var d = data;
+  root.appendChild(el('<div class="section-title" style="margin-top:4px;"><h2>'+t('miOverview')+'</h2></div>'));
+
+  // Guests
+  var confirmed = d.guests.filter(function(g){return g.rsvp==='Príde'||g.rsvp==='Attending';});
+  var pending = d.guests.filter(function(g){return g.rsvp==='Čaká sa'||g.rsvp==='Pending';});
+  var declined = d.guests.filter(function(g){return g.rsvp==='Nepríde'||g.rsvp==='Not attending';});
+  var totalHeadcount = d.guests.reduce(function(s,g){return s+guestHeadcount(g);},0);
+  var confirmedHeadcount = confirmed.reduce(function(s,g){return s+guestHeadcount(g);},0);
+  var accomGuests = d.guests.filter(function(g){return g.accommodation;});
+  var accomHeadcount = accomGuests.reduce(function(s,g){return s+guestHeadcount(g);},0);
+
+  var sec1 = el('<div class="ov-section"><h4>👥 '+t('miGuests')+'</h4></div>');
+  sec1.innerHTML += ovRow(t('ovGuestEntries'), d.guests.length) +
+    ovRow(t('ovTotalHeadcount'), totalHeadcount) +
+    ovRow(t('ovConfirmed'), confirmed.length+' ('+confirmedHeadcount+' '+t('ovPeople')+')') +
+    ovRow(t('ovPending'), pending.length) +
+    ovRow(t('ovDeclined'), declined.length) +
+    ovRow('🏨 '+t('ovAccommodation'), accomHeadcount+' '+t('ovPeople')+' ('+accomGuests.length+' '+t('ovGuestsWord')+')');
+  root.appendChild(sec1);
+
+  // Tasks
+  var doneTasks = d.tasks.filter(function(x){return x.done;}).length;
+  var sec2 = el('<div class="ov-section"><h4>✅ '+t('miTasks')+'</h4></div>');
+  sec2.innerHTML += ovRow(t('ovDone'), doneTasks+' / '+d.tasks.length);
+  root.appendChild(sec2);
+
+  // Budget
+  var spent = d.expenses.reduce(function(s,e){return s+(Number(e.amount)||0);},0);
+  var paidSum = d.expenses.filter(function(e){return e.paid;}).reduce(function(s,e){return s+(Number(e.amount)||0);},0);
+  var sec3 = el('<div class="ov-section"><h4>💰 '+t('tabBudget')+'</h4></div>');
+  sec3.innerHTML += ovRow(t('spentTotal'), fmtMoney(spent)+' / '+fmtMoney(d.budgetTotal)) +
+    ovRow(t('paidLabel'), fmtMoney(paidSum)) +
+    ovRow(t('unpaidLabel'), fmtMoney(spent-paidSum));
+  root.appendChild(sec3);
+
+  // Seating
+  var totalSeats = d.tables.reduce(function(s,tb){return s+(Number(tb.seats)||0);},0);
+  var totalOccupied = d.tables.reduce(function(s,tb){return s+tableOccupancy(tb.id);},0);
+  var sec4 = el('<div class="ov-section"><h4>🪑 '+t('miSeating')+'</h4></div>');
+  sec4.innerHTML += ovRow(t('ovTables'), d.tables.length) +
+    ovRow(t('ovSeated'), totalOccupied+' / '+totalSeats);
+  root.appendChild(sec4);
+
+  // Everything else, simple counts
+  var sec6 = el('<div class="ov-section"><h4>📋 '+t('ovOther')+'</h4></div>');
+  sec6.innerHTML += ovRow(t('miTransport'), d.transport.length) +
+    ovRow(t('scheduleLink').replace('📋 ',''), d.events.length) +
+    ovRow(t('miReminders'), d.reminders.filter(function(x){return !x.done;}).length+' / '+d.reminders.length) +
+    ovRow(t('miGifts'), d.gifts.length) +
+    ovRow(t('miInspirations'), d.inspirations.length) +
+    ovRow(t('miPlaylist'), d.playlist.length) +
+    ovRow(t('miNotes'), d.notes.length);
+  root.appendChild(sec6);
+}
+var calState = { month:null, year:null };
+
+function pad2(n){ return n<10 ? '0'+n : ''+n; }
+function dateStr(y,m,d){ return y+'-'+pad2(m)+'-'+pad2(d); }
+
+function collectDayItems(dstr){
+  var d = data;
+  var items = [];
+  d.tasks.forEach(function(x){ if(x.dueDate===dstr) items.push({icon:'✅', label:x.title, go:function(){ openEditSheet('tasks', x.id); }}); });
+  d.reminders.forEach(function(x){ if(x.date===dstr) items.push({icon:'🔔', label:x.text+(x.time?' · '+x.time:''), go:function(){ openEditSheet('reminders', x.id); }}); });
+  d.events.forEach(function(x){ if(x.date===dstr) items.push({icon:'📅', label:x.title+(x.time?' · '+x.time:''), go:function(){ openEditSheet('events', x.id); }}); });
+  d.transport.forEach(function(x){ if(x.date===dstr) items.push({icon:'🚗', label:x.title, go:function(){ openEditSheet('transport', x.id); }}); });
+  return items;
+}
+
+function renderCalendar(root){
+  var today = new Date();
+  if(calState.month===null){
+    calState.month = today.getMonth()+1;
+    calState.year = today.getFullYear();
+  }
+  var y = calState.year, m = calState.month;
+
+  var nav = el('<div class="cal-nav"><button id="calPrev">‹</button><span class="cal-month-label serif"></span><button id="calNext">›</button></div>');
+  nav.querySelector('.cal-month-label').textContent = t('monthNames')[m-1] + ' ' + y;
+  nav.querySelector('#calPrev').onclick = function(){ m--; if(m<1){m=12;y--;} calState.month=m; calState.year=y; render(); };
+  nav.querySelector('#calNext').onclick = function(){ m++; if(m>12){m=1;y++;} calState.month=m; calState.year=y; render(); };
+  root.appendChild(nav);
+
+  var dow = el('<div class="cal-dow-row"></div>');
+  t('weekdayShort').forEach(function(w){ dow.appendChild(el('<div>'+esc(w)+'</div>')); });
+  root.appendChild(dow);
+
+  var firstDay = new Date(y, m-1, 1);
+  var startOffset = (firstDay.getDay()+6)%7; // Monday=0
+  var daysInMonth = new Date(y, m, 0).getDate();
+  var todayStr = dateStr(today.getFullYear(), today.getMonth()+1, today.getDate());
+  var weddingDate = data.weddingDate || '';
+
+  var g = el('<div class="cal-grid"></div>');
+  for(var i=0;i<startOffset;i++){ g.appendChild(el('<div class="cal-cell empty"></div>')); }
+  for(var day=1; day<=daysInMonth; day++){
+    var dstr = dateStr(y,m,day);
+    var nd = nameDayFor(m, day);
+    var isToday = dstr===todayStr;
+    var isWedding = weddingDate && dstr===weddingDate;
+    var itemCount = collectDayItems(dstr).length;
+    var cell = el('<div class="cal-cell'+(isToday?' today':'')+(isWedding?' wedding':'')+'"></div>');
+    if(isWedding) cell.appendChild(el('<div class="cal-ring">💍</div>'));
+    cell.appendChild(el('<div class="cal-num">'+day+'</div>'));
+    if(nd) cell.appendChild(el('<div class="cal-name">'+esc(nd.split(/,| a /)[0])+'</div>'));
+    if(itemCount>0){
+      var dots = el('<div class="cal-dots"></div>');
+      for(var k=0;k<Math.min(itemCount,3);k++){ dots.appendChild(el('<span></span>')); }
+      cell.appendChild(dots);
+    }
+    (function(dstr){ cell.onclick = function(){ openDaySheet(dstr); }; })(dstr);
+    g.appendChild(cell);
+  }
+  root.appendChild(g);
+
+  var schedLink = el('<button class="btn btn-outline btn-block" style="margin-top:18px;">'+t('scheduleLink')+'</button>');
+  schedLink.onclick = function(){ goto('events'); };
+  root.appendChild(schedLink);
+}
+
+function openDaySheet(dstr){
+  var parts = dstr.split('-');
+  var y = Number(parts[0]), m = Number(parts[1]), day = Number(parts[2]);
+  var nd = nameDayFor(m, day);
+  var niceDate = fmtDate(dstr);
+  var isWedding = data.weddingDate && dstr===data.weddingDate;
+  var items = collectDayItems(dstr);
+
+  var html = '<div class="sheet-close"><button id="shClose">'+t('close')+'</button></div>' +
+    '<h3 class="serif">'+esc(niceDate)+'</h3>' +
+    (isWedding?'<div class="tag" style="margin-bottom:8px;">'+esc(t('weddingDayLabel'))+'</div>':'') +
+    (nd?'<div class="row-sub" style="margin-bottom:10px;">'+esc(t('nameDayLabel'))+': '+esc(nd)+'</div>':'') +
+    '<div id="dayItemsWrap"></div>' +
+    '<button class="btn btn-outline btn-block" id="shAddRem" style="margin-top:12px;">'+t('addReminderForDay')+'</button>';
+
+  openSheet(html, function(sheet){
+    var wrap = sheet.querySelector('#dayItemsWrap');
+    if(items.length===0){
+      wrap.appendChild(el('<div class="row-sub">'+esc(t('noItemsThisDay'))+'</div>'));
+    } else {
+      items.forEach(function(it){
+        var row = el('<div class="day-item"><span class="di-ico">'+it.icon+'</span><span>'+esc(it.label)+'</span></div>');
+        row.onclick = function(){ closeSheet(); setTimeout(it.go, 200); };
+        wrap.appendChild(row);
+      });
+    }
+    sheet.querySelector('#shAddRem').onclick = function(){
+      closeSheet();
+      setTimeout(function(){ openEditSheet('reminders', null, {date:dstr}); }, 200);
+    };
+  });
+}
+
+/* ===================== BUDGET ===================== */
+function renderCateringCalc(root){
+  var d = data;
+  var confirmedList = d.guests.filter(function(g){return g.rsvp==='Príde'||g.rsvp==='Attending';});
+  var adultsCount = confirmedList.reduce(function(s,g){return s+1+(g.partnerName?1:0);},0);
+  var childrenCount = confirmedList.reduce(function(s,g){ var k=g.childrenList?g.childrenList.length:(Number(g.children)||0); return s+k; },0);
+
+  var ratio = (d.cateringChildRatio!=null && d.cateringChildRatio!=='') ? Number(d.cateringChildRatio) : 50;
+  var priceUnit = Number(d.cateringPricePerUnit)||0;
+  var totalUnits = adultsCount + childrenCount*(ratio/100);
+  var estCost = totalUnits*priceUnit;
+
+  var card = el('<div class="ov-section" style="margin-top:16px;"></div>');
+  card.innerHTML = '<h4>🍽️ '+t('cateringTitle')+'</h4>' +
+    ovRow(t('cateringAdults'), adultsCount) +
+    ovRow(t('cateringChildren'), childrenCount) +
+    '<div style="margin-top:10px;"><label style="font-size:12.5px;color:var(--ink-soft);">'+t('cateringChildPortion')+': <span id="ratioVal">'+ratio+'%</span></label>' +
+    '<input type="range" id="childRatio" min="0" max="100" step="5" value="'+ratio+'" style="width:100%;margin-top:4px;"></div>' +
+    '<div class="field" style="margin-top:10px;"><label>'+t('cateringPricePerUnit')+'</label><input type="number" id="priceUnit" value="'+(priceUnit||'')+'"></div>' +
+    '<div class="ov-row" style="margin-top:8px;"><span>'+t('cateringTotalUnits')+'</span><span class="ov-val" id="totalUnitsVal">'+totalUnits.toFixed(1)+'</span></div>' +
+    '<div class="ov-row"><span>'+t('cateringEstCost')+'</span><span class="ov-val" id="estCostVal">'+fmtMoney(estCost)+'</span></div>';
+  root.appendChild(card);
+
+  var rangeInput = card.querySelector('#childRatio');
+  var ratioValSpan = card.querySelector('#ratioVal');
+  var priceInput = card.querySelector('#priceUnit');
+  var totalUnitsSpan = card.querySelector('#totalUnitsVal');
+  var estCostSpan = card.querySelector('#estCostVal');
+
+  function recalcCatering(){
+    var r = Number(rangeInput.value);
+    var p = Number(priceInput.value)||0;
+    var tu = adultsCount + childrenCount*(r/100);
+    ratioValSpan.textContent = r+'%';
+    totalUnitsSpan.textContent = tu.toFixed(1);
+    estCostSpan.textContent = fmtMoney(tu*p);
+    d.cateringChildRatio = r;
+    d.cateringPricePerUnit = priceInput.value===''?'':p;
+    save();
+  }
+  rangeInput.oninput = recalcCatering;
+  priceInput.oninput = recalcCatering;
+}
+
+function renderBudget(root){
+  var d = data;
+  var spent = d.expenses.reduce(function(s,e){return s+(Number(e.amount)||0);},0);
+  var remaining = (Number(d.budgetTotal)||0) - spent;
+
+  var hero = el('<div class="budget-hero"></div>');
+  hero.innerHTML = '<div class="row-sub">'+t('spentTotal')+'</div>' +
+    '<div class="amt serif">'+fmtMoney(spent)+' <small>/ '+fmtMoney(d.budgetTotal)+'</small></div>';
+  root.appendChild(hero);
+
+  var pct = d.budgetTotal>0 ? Math.min(100, Math.round(spent/d.budgetTotal*100)) : 0;
+  var prog = el('<div class="progress"><div style="width:'+pct+'%"></div></div>');
+  root.appendChild(prog);
+  root.appendChild(el('<div class="row-sub" style="text-align:center;margin-top:8px;">'+t('remaining')+fmtMoney(remaining)+'</div>'));
+
+  var editBtn = el('<button class="btn btn-outline btn-block" style="margin-top:16px;">'+t('editTotalBudget')+'</button>');
+  editBtn.onclick = function(){ openBudgetTotalSheet(); };
+  root.appendChild(editBtn);
+
+  renderCateringCalc(root);
+
+  root.appendChild(el('<div class="section-title"><h2>'+t('categories')+'</h2></div>'));
+  var catWrap = el('<div></div>');
+  d.categories.forEach(function(cat){
+    var catSpent = d.expenses.filter(function(e){return e.categoryId===cat.id;}).reduce(function(s,e){return s+(Number(e.amount)||0);},0);
+    var row = el('<div class="cat-row" style="cursor:pointer;"><div class="cat-top"><span>'+esc(catName(cat))+'</span><span class="amt-sub">'+fmtMoney(catSpent)+'</span></div>'+
+      '<div class="progress"><div style="width:'+(d.budgetTotal>0?Math.min(100,Math.round(catSpent/(d.budgetTotal||1)*100)):0)+'%"></div></div></div>');
+    row.onclick = function(){ openCategorySheet(cat.id); };
+    catWrap.appendChild(row);
+  });
+  root.appendChild(catWrap);
+  var addCatBtn = el('<button class="btn btn-outline btn-block" style="margin-top:10px;">'+t('addCategory')+'</button>');
+  addCatBtn.onclick = function(){ openCategorySheet(null); };
+  root.appendChild(addCatBtn);
+
+  root.appendChild(el('<div class="section-title"><h2>'+t('expenses')+'</h2></div>'));
+  if(d.expenses.length===0){
+    root.appendChild(el('<div class="empty"><span class="em-ico">💰</span><p>'+t('noExpenses')+'</p></div>'));
+  } else {
+    var wrap = el('<div></div>');
+    d.expenses.slice().sort(function(a,b){return (b.date||'').localeCompare(a.date||'');}).forEach(function(e){
+      var cat = d.categories.find(function(c){return c.id===e.categoryId;});
+      var row = el('<div class="list-row" style="cursor:pointer;"><div class="row-main"><div class="row-title">'+esc(e.name)+'</div>'+
+        '<div class="row-sub">'+esc((cat?catName(cat):'')+(e.date?(' · '+fmtDateShort(e.date)):''))+'</div></div>'+
+        '<div style="text-align:right;"><div class="amt-sub" style="font-weight:600;">'+fmtMoney(e.amount)+'</div>'+
+        '<span class="tag" style="'+(e.paid?'background:var(--ok-tint);color:var(--seat-ok);':'background:var(--danger-tint);color:var(--danger);')+'margin-top:3px;display:inline-block;">'+(e.paid?t('paidLabel'):t('unpaidLabel'))+'</span></div></div>');
+      row.onclick = function(){ openExpenseSheet(e.id); };
+      wrap.appendChild(row);
+    });
+    root.appendChild(wrap);
+  }
+
+  var fab = document.getElementById('fabBtn');
+  fab.style.display = 'flex';
+  fab.onclick = function(){ openExpenseSheet(null); };
+}
+
+function openCategorySheet(catId){
+  var cat = catId ? data.categories.find(function(c){return c.id===catId;}) : null;
+  var currentName = cat ? catName(cat) : '';
+  var html = '<div class="sheet-close"><button id="shClose">'+t('close')+'</button></div>' +
+    '<h3 class="serif">'+(catId?t('edit'):t('addCategory'))+'</h3>' +
+    '<div class="field"><label>'+t('categoryLabel')+'</label><input type="text" id="fCatName" value="'+esc(currentName)+'" placeholder="'+t('newCategoryPlaceholder')+'"></div>' +
+    '<div class="sheet-actions"><button class="btn btn-gold btn-block" id="shSave">'+t('save')+'</button></div>' +
+    (catId?'<a class="delete-link" id="shDelete">'+t('delete')+'</a>':'');
+  openSheet(html, function(sheet){
+    sheet.querySelector('#shSave').onclick = function(){
+      var name = sheet.querySelector('#fCatName').value.trim();
+      if(!name){ showToast(t('fillRequired')); return; }
+      if(catId){
+        cat.name = name;
+        delete cat.key;
+      } else {
+        data.categories.push({id:uid(), name:name});
+      }
+      save(); closeSheet(); render(); showToast(t('saved'));
+    };
+    if(catId){
+      sheet.querySelector('#shDelete').onclick = function(){
+        data.categories = data.categories.filter(function(c){return c.id!==catId;});
+        save(); closeSheet(); render(); showToast(t('deleted'));
+      };
+    }
+  });
+}
+
+function openBudgetTotalSheet(){
+  var html = '<div class="sheet-close"><button id="shClose">'+t('close')+'</button></div>' +
+    '<h3 class="serif">'+t('totalBudgetTitle')+'</h3>' +
+    '<div class="field"><label>'+t('amountLabel')+'</label><input type="number" id="fBudget" value="'+(data.budgetTotal||'')+'"></div>' +
+    '<div class="sheet-actions"><button class="btn btn-gold btn-block" id="shSave">'+t('save')+'</button></div>';
+  openSheet(html, function(sheet){
+    sheet.querySelector('#shSave').onclick = function(){
+      data.budgetTotal = Number(sheet.querySelector('#fBudget').value)||0;
+      save(); closeSheet(); render(); showToast(t('budgetSaved'));
+    };
+  });
+}
+
+function openExpenseSheet(id){
+  var exp = id ? data.expenses.find(function(e){return e.id===id;}) : {id:uid(), name:'', amount:'', categoryId:data.categories[0]?data.categories[0].id:'', date:''};
+  var catOptions = data.categories.map(function(c){return '<option value="'+c.id+'" '+(c.id===exp.categoryId?'selected':'')+'>'+esc(catName(c))+'</option>';}).join('') +
+    '<option value="__new__">'+esc(t('addCategory'))+'</option>';
+  var html = '<div class="sheet-close"><button id="shClose">'+t('close')+'</button></div>' +
+    '<h3 class="serif">'+(id?t('editExpense'):t('newExpense'))+'</h3>' +
+    '<div class="field"><label>'+t('nameLabel')+'</label><input type="text" id="fName" value="'+esc(exp.name)+'"></div>' +
+    '<div class="field"><label>'+t('amountLabel')+'</label><input type="number" id="fAmount" value="'+esc(exp.amount)+'"></div>' +
+    '<div class="field"><label>'+t('categoryLabel')+'</label><select id="fCat">'+catOptions+'</select></div>' +
+    '<div id="newCatRow" style="display:none;gap:6px;margin:-6px 0 14px;">' +
+      '<input type="text" id="newCatInput" placeholder="'+t('newCategoryPlaceholder')+'" style="flex:1;">' +
+      '<button class="btn btn-outline" id="newCatConfirm" type="button" style="flex:none;">'+t('add')+'</button>' +
+    '</div>' +
+    '<div class="field"><label>'+t('dateLabel')+'</label><input type="date" id="fDate" value="'+esc(exp.date||'')+'"></div>' +
+    '<div class="field field-check"><input type="checkbox" id="fPaid" '+(exp.paid?'checked':'')+'><label for="fPaid" style="margin:0;">'+t('paidLabel')+'</label></div>' +
+    '<div class="sheet-actions"><button class="btn btn-gold btn-block" id="shSave">'+t('save')+'</button></div>' +
+    (id?'<a class="delete-link" id="shDelete">'+t('deleteExpense')+'</a>':'');
+  openSheet(html, function(sheet){
+    var catSelect = sheet.querySelector('#fCat');
+    var newCatRow = sheet.querySelector('#newCatRow');
+    var newCatInput = sheet.querySelector('#newCatInput');
+    catSelect.onchange = function(){
+      if(catSelect.value==='__new__'){
+        newCatRow.style.display = 'flex';
+        newCatInput.value = '';
+        newCatInput.focus();
+      } else {
+        newCatRow.style.display = 'none';
+      }
+    };
+    function confirmNewCat(){
+      var newName = newCatInput.value.trim();
+      if(!newName) return;
+      var newCat = {id:uid(), name:newName};
+      data.categories.push(newCat);
+      save();
+      var opt = el('<option value="'+newCat.id+'">'+esc(newCat.name)+'</option>');
+      catSelect.insertBefore(opt, catSelect.lastElementChild);
+      catSelect.value = newCat.id;
+      newCatRow.style.display = 'none';
+    }
+    sheet.querySelector('#newCatConfirm').onclick = confirmNewCat;
+    newCatInput.onkeydown = function(e){ if(e.key==='Enter'){ e.preventDefault(); confirmNewCat(); } };
+    sheet.querySelector('#shSave').onclick = function(){
+      if(catSelect.value==='__new__'){ showToast(t('fillRequired')); return; }
+      exp.name = sheet.querySelector('#fName').value.trim() || t('untitled');
+      exp.amount = Number(sheet.querySelector('#fAmount').value)||0;
+      exp.categoryId = catSelect.value;
+      exp.date = sheet.querySelector('#fDate').value;
+      exp.paid = sheet.querySelector('#fPaid').checked;
+      if(!id) data.expenses.push(exp);
+      save(); closeSheet(); render(); showToast(t('expenseSaved'));
+    };
+    if(id){
+      sheet.querySelector('#shDelete').onclick = function(){
+        data.expenses = data.expenses.filter(function(e){return e.id!==id;});
+        save(); closeSheet(); render(); showToast(t('expenseDeleted'));
+      };
+    }
+  });
+}
+
+/* ===================== SEATING ===================== */
+function guestTableId(guestId){
+  var tb = data.tables.find(function(x){ return (x.guestIds||[]).indexOf(guestId)!==-1; });
+  return tb ? tb.id : '';
+}
+function tableOccupancy(tableId){
+  var count = (data.tables.find(function(tb){return tb.id===tableId;})||{}).manualNames;
+  count = count ? count.length : 0;
+  data.guests.forEach(function(g){
+    var gTableId = guestTableId(g.id);
+    if(gTableId === tableId){ count += 1 + (g.partnerName ? 1 : 0); }
+    var kids = g.childrenList;
+    if(!kids){ var n = Number(g.children)||0; kids = []; for(var i=0;i<n;i++) kids.push({tableId:''}); }
+    kids.forEach(function(c){
+      var ctid = c.tableId || gTableId;
+      if(ctid === tableId) count += 1;
+    });
+  });
+  return count;
+}
+
+function renderSeating(root){
+  root.appendChild(el('<div class="section-title" style="margin-top:4px;"><h2>'+t('seatingTitle')+'</h2></div>'));
+  root.appendChild(el('<div class="row-sub" style="margin-bottom:12px;">'+t('seatingHint')+'</div>'));
+  var d = data;
+  var assignedIds = {};
+  d.tables.forEach(function(tb){ (tb.guestIds||[]).forEach(function(gid){ assignedIds[gid]=true; }); });
+
+  if(d.tables.length===0){
+    root.appendChild(el('<div class="empty"><span class="em-ico">🪑</span><p>'+t('createFirstTable')+'</p></div>'));
+  }
+  d.tables.forEach(function(table){
+    var occupied = tableOccupancy(table.id);
+    var seats = Number(table.seats)||0;
+    var overCap = seats>0 && occupied>seats;
+    var okCap = seats>0 && occupied>0 && occupied<=seats;
+    var card = el('<div class="table-card'+(overCap?' over':'')+(okCap?' ok':'')+'"></div>');
+    var head = el('<div style="display:flex;justify-content:space-between;align-items:center;"><h4>'+esc(table.name)+'</h4><button style="font-size:12px;color:var(--ink-soft);">'+t('editIcon')+'</button></div>');
+    head.querySelector('button').onclick = function(){ openTableSheet(table.id); };
+    card.appendChild(head);
+    card.appendChild(el('<div class="row-sub" style="'+(overCap?'color:var(--danger);font-weight:600;':(okCap?'color:var(--seat-ok);font-weight:600;':''))+'">'+occupied+' / '+(table.seats||0)+t('seatsOf')+'</div>'));
+    var chips = el('<div style="margin-top:8px;"></div>');
+    (table.guestIds||[]).forEach(function(gid){
+      var g = d.guests.find(function(x){return x.id===gid;});
+      if(!g) return;
+      var kidNames = (g.childrenList||[]).filter(function(c){ return !c.tableId || c.tableId===table.id; }).map(function(c){return c.name;}).filter(Boolean);
+      var kidNote = kidNames.length ? ' +'+kidNames.join(', ')+'👶' : (Number(g.children) && !g.childrenList ? ' +'+Number(g.children)+'👶' : '');
+      var extra = (g.partnerName ? ' & '+g.partnerName : '') + kidNote;
+      var chip = el('<span class="seat-chip">'+esc(g.name+extra)+' <button>✕</button></span>');
+      chip.querySelector('button').onclick = function(){
+        table.guestIds = table.guestIds.filter(function(x){return x!==gid;});
+        save(); render();
+      };
+      chips.appendChild(chip);
+    });
+    d.guests.forEach(function(g){
+      var gTableId = guestTableId(g.id);
+      (g.childrenList||[]).forEach(function(c){
+        if(c.tableId===table.id && gTableId!==table.id){
+          var childLabel = (c.name || t('childGeneric'))+' 👶 ('+g.name+')';
+          var childChip = el('<span class="seat-chip child-chip">'+esc(childLabel)+' <button>✕</button></span>');
+          childChip.querySelector('button').onclick = function(){
+            c.tableId = '';
+            save(); render();
+          };
+          chips.appendChild(childChip);
+        }
+      });
+    });
+    (table.manualNames||[]).forEach(function(name, idx){
+      var chip = el('<span class="seat-chip">'+esc(name)+' <button>✕</button></span>');
+      chip.querySelector('button').onclick = function(){
+        table.manualNames.splice(idx,1);
+        save(); render();
+      };
+      chips.appendChild(chip);
+    });
+    card.appendChild(chips);
+    root.appendChild(card);
+  });
+
+  var unassigned = d.guests.filter(function(g){ return !assignedIds[g.id]; });
+  if(d.guests.length>0){
+    var box = el('<div class="unassigned-box"><div class="row-sub" style="margin-bottom:6px;">'+t('unassignedGuests')+' ('+unassigned.length+')</div></div>');
+    unassigned.forEach(function(g){
+      var chip = el('<span class="seat-chip" style="cursor:pointer;">'+esc(g.name)+'</span>');
+      chip.onclick = function(){ openEditSheet('guests', g.id); };
+      box.appendChild(chip);
+    });
+    root.appendChild(box);
+  }
+
+  var fab = document.getElementById('fabBtn');
+  fab.style.display = 'flex';
+  fab.onclick = function(){ openTableSheet(null); };
+}
+
+function openTableSheet(id){
+  var table = id ? data.tables.find(function(tb){return tb.id===id;}) : {id:uid(), name:t('table')+(data.tables.length+1), seats:8, guestIds:[], manualNames:[]};
+  var html = '<div class="sheet-close"><button id="shClose">'+t('close')+'</button></div>' +
+    '<h3 class="serif">'+(id?t('editTable'):t('newTable'))+'</h3>' +
+    '<div class="field"><label>'+t('tableName')+'</label><input type="text" id="fName" value="'+esc(table.name)+'"></div>' +
+    '<div class="field"><label>'+t('seatsCount')+'</label><input type="number" id="fSeats" value="'+esc(table.seats)+'"></div>' +
+    '<div class="sheet-actions"><button class="btn btn-gold btn-block" id="shSave">'+t('save')+'</button></div>' +
+    (id?'<a class="delete-link" id="shDelete">'+t('deleteTable')+'</a>':'');
+  openSheet(html, function(sheet){
+    sheet.querySelector('#shSave').onclick = function(){
+      table.name = sheet.querySelector('#fName').value.trim() || table.name;
+      table.seats = Number(sheet.querySelector('#fSeats').value)||0;
+      if(!id) data.tables.push(table);
+      save(); closeSheet(); render(); showToast(t('tableSaved'));
+    };
+    if(id){
+      sheet.querySelector('#shDelete').onclick = function(){
+        data.tables = data.tables.filter(function(tb){return tb.id!==id;});
+        save(); closeSheet(); render(); showToast(t('tableDeleted'));
+      };
+    }
+  });
+}
+
+/* ===================== SETTINGS ===================== */
+function renderSettings(root){
+  root.appendChild(el('<div class="section-title" style="margin-top:4px;"><h2>'+t('settingsTitle')+'</h2></div>'));
+
+  var box = el('<div></div>');
+  box.appendChild(el('<div class="field"><label>'+t('namesFieldLabel')+'</label></div>'));
+  var namesInput = el('<input type="text" placeholder="'+t('namesPlaceholder')+'" value="'+esc(data.names||'')+'">');
+  box.appendChild(namesInput);
+  box.appendChild(el('<div style="height:14px;"></div>'));
+  box.appendChild(el('<div class="field"><label>'+t('weddingDateLabel')+'</label></div>'));
+  var dateInput = el('<input type="date" value="'+esc(data.weddingDate||'')+'">');
+  box.appendChild(dateInput);
+  box.appendChild(el('<div style="height:16px;"></div>'));
+  var saveBtn = el('<button class="btn btn-gold btn-block">'+t('save')+'</button>');
+  saveBtn.onclick = function(){
+    data.names = namesInput.value.trim();
+    data.weddingDate = dateInput.value;
+    save(); showToast(t('saved')); render();
+  };
+  box.appendChild(saveBtn);
+  root.appendChild(box);
+
+  root.appendChild(el('<div class="section-title"><h2>'+t('appearance')+'</h2></div>'));
+  var themeRow = el('<div class="list-row"><div class="row-main"><div class="row-title">'+t('darkMode')+'</div><div class="row-sub">'+t('darkModeDesc')+'</div></div></div>');
+  var toggle = el('<button class="btn btn-outline">'+(document.documentElement.getAttribute('data-theme')==='dark'?t('on'):t('off'))+'</button>');
+  toggle.onclick = function(){ toggleTheme(); render(); };
+  themeRow.appendChild(toggle);
+  root.appendChild(themeRow);
+
+  var langRow = el('<div class="list-row"><div class="row-main"><div class="row-title">'+t('language')+'</div><div class="row-sub">'+t('languageDesc')+'</div></div></div>');
+  var langToggle = el('<button class="btn btn-outline">'+(LANG==='en'?'EN':'SK')+'</button>');
+  langToggle.onclick = function(){ toggleLang(); };
+  langRow.appendChild(langToggle);
+  root.appendChild(langRow);
+
+  root.appendChild(el('<div class="section-title"><h2>'+t('colorTheme')+'</h2></div>'));
+  root.appendChild(el('<div class="row-sub">'+t('colorThemeDesc')+'</div>'));
+  var swRow = el('<div class="swatch-row"></div>');
+  var curPalette = data.palette || '';
+  PALETTES.forEach(function(p){
+    var isNone = p.id==='';
+    var sw = el('<button class="swatch'+(curPalette===p.id?' active':'')+'" title="'+t(p.labelKey)+'" style="background:'+(isNone?'linear-gradient(135deg,#AD8A4E,#EFE3CB)':p.swatch)+';">'+(isNone?'✕':'')+'</button>');
+    sw.onclick = function(){ setPalette(p.id); };
+    swRow.appendChild(sw);
+  });
+  root.appendChild(swRow);
+
+  root.appendChild(el('<div class="section-title"><h2>'+t('dataSection')+'</h2></div>'));
+  var resetBtn = el('<button class="btn btn-outline btn-block" style="color:var(--danger);border-color:var(--danger);">'+t('deleteAllData')+'</button>');
+  resetBtn.onclick = function(){ openDeleteConfirm1(); };
+  root.appendChild(resetBtn);
+}
+
+function openDeleteConfirm1(){
+  var html = '<div class="sheet-close"><button id="shClose">'+t('close')+'</button></div>' +
+    '<h3 class="serif">'+t('deleteAllData')+'</h3>' +
+    '<p style="color:var(--ink-soft);font-size:13.5px;line-height:1.5;">'+t('confirmDeleteAll')+'</p>' +
+    '<div class="sheet-actions"><button class="btn btn-outline btn-block" id="shCancel">'+t('cancel')+'</button>' +
+    '<button class="btn btn-block" style="background:var(--danger);color:#fff;" id="shNext">'+t('deleteAllData')+'</button></div>';
+  openSheet(html, function(sheet){
+    sheet.querySelector('#shCancel').onclick = function(){ closeSheet(); };
+    sheet.querySelector('#shNext').onclick = function(){
+      closeSheet();
+      setTimeout(openDeleteConfirm2, 220);
+    };
+  });
+}
+
+function openDeleteConfirm2(){
+  var html = '<div class="sheet-close"><button id="shClose">'+t('close')+'</button></div>' +
+    '<h3 class="serif">'+t('deleteAllData')+'</h3>' +
+    '<p style="color:var(--danger);font-size:13.5px;line-height:1.5;">'+t('confirmDeleteAll2')+'</p>' +
+    '<div class="sheet-actions"><button class="btn btn-outline btn-block" id="shCancel">'+t('cancel')+'</button>' +
+    '<button class="btn btn-block" style="background:var(--danger);color:#fff;" id="shConfirm">'+t('yesDelete')+'</button></div>';
+  openSheet(html, function(sheet){
+    sheet.querySelector('#shCancel').onclick = function(){ closeSheet(); };
+    sheet.querySelector('#shConfirm').onclick = function(){
+      var keepLang = data.lang, keepPalette = data.palette, keepDark = data.darkMode;
+      data = defaultData();
+      data.lang = keepLang; data.palette = keepPalette; data.darkMode = keepDark;
+      save();
+      closeSheet();
+      render();
+      showToast(t('dataDeleted'));
+    };
+  });
+}
+
+function toggleLang(){
+  LANG = LANG === 'en' ? 'sk' : 'en';
+  data.lang = LANG;
+  document.documentElement.setAttribute('lang', LANG);
+  save();
+  buildConfigs();
+  render();
+}
+
+function toggleTheme(){
+  var cur = document.documentElement.getAttribute('data-theme');
+  var next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  data.darkMode = next;
+  save();
+}
+
+/* ===================== EXCEL EXPORT ===================== */
+function exportToExcel(){
+  if(typeof XLSX === 'undefined'){
+    showToast(t('exportNoLibrary'));
+    return;
+  }
+  var d = data;
+  var sk = LANG!=='en';
+  var wb = XLSX.utils.book_new();
+
+  function addSheet(name, header, rows){
+    var aoa = [header].concat(rows);
+    var ws = XLSX.utils.aoa_to_sheet(aoa);
+    XLSX.utils.book_append_sheet(wb, ws, name.substring(0,31));
+  }
+
+  // Úlohy / Tasks
+  addSheet(sk?'Úlohy':'Tasks', sk?['Názov','Kategória','Termín','Hotovo']:['Title','Category','Due date','Done'],
+    d.tasks.map(function(x){ return [x.title||'', x.category||'', x.dueDate||'', x.done?(sk?'Áno':'Yes'):(sk?'Nie':'No')]; }));
+
+  // Hostia / Guests
+  addSheet(sk?'Hostia':'Guests', sk?['Meno','Partner','Strana','RSVP','Deti (mená)','Počet detí','Menu/poznámka','Ubytovanie','Stôl','Poznámka']:['Name','Partner','Side','RSVP','Children (names)','Children count','Menu/note','Accommodation','Table','Note'],
+    d.guests.map(function(g){
+      var kids = g.childrenList || [];
+      var kidNames = kids.map(function(c){return c.name;}).filter(Boolean).join(', ');
+      var kidCount = kids.length ? kids.length : (Number(g.children)||0);
+      var tbl = data.tables.find(function(tb){ return (tb.guestIds||[]).indexOf(g.id)!==-1; });
+      return [g.name||'', g.partnerName||'', g.side||'', g.rsvp||'', kidNames, kidCount, g.menu||'', g.accommodation?(sk?'Áno':'Yes'):(sk?'Nie':'No'), tbl?tbl.name:'', g.notes||''];
+    }));
+
+  // Zasadací poriadok / Seating
+  addSheet(sk?'Zasadací poriadok':'Seating', sk?['Stôl','Počet miest','Obsadenosť','Hostia']:['Table','Seats','Occupied','Guests'],
+    d.tables.map(function(tb){
+      var names = (tb.guestIds||[]).map(function(gid){ var g=d.guests.find(function(x){return x.id===gid;}); return g?g.name:''; }).filter(Boolean);
+      return [tb.name||'', tb.seats||0, tableOccupancy(tb.id), names.join(', ')];
+    }));
+
+  // Rozpočet - výdavky / Budget - expenses
+  addSheet(sk?'Rozpočet - výdavky':'Budget - expenses', sk?['Názov','Kategória','Suma (€)','Dátum','Uhradené']:['Name','Category','Amount (€)','Date','Paid'],
+    d.expenses.map(function(e){
+      var cat = d.categories.find(function(c){return c.id===e.categoryId;});
+      return [e.name||'', cat?catName(cat):'', Number(e.amount)||0, e.date||'', e.paid?(sk?'Áno':'Yes'):(sk?'Nie':'No')];
+    }));
+
+  // Rozpočet - kategórie / Budget - categories
+  addSheet(sk?'Rozpočet - kategórie':'Budget - categories', sk?['Kategória','Minuté (€)']:['Category','Spent (€)'],
+    d.categories.map(function(c){
+      var spent = d.expenses.filter(function(e){return e.categoryId===c.id;}).reduce(function(s,e){return s+(Number(e.amount)||0);},0);
+      return [catName(c), spent];
+    }));
+
+  // Dodávatelia / Vendors
+  addSheet(sk?'Dodávatelia':'Vendors', sk?['Názov','Kategória','Telefón','Cena (€)','Stav','Poznámka']:['Name','Category','Phone','Price (€)','Status','Note'],
+    d.vendors.map(function(v){ return [v.name||'', v.category||'', v.phone||'', Number(v.price)||'', v.status||'', v.notes||'']; }));
+
+  // Inšpirácie / Inspirations
+  addSheet(sk?'Inšpirácie':'Inspirations', sk?['Názov','Kategória','Odkaz','Poznámka']:['Title','Category','Link','Note'],
+    d.inspirations.map(function(x){ return [x.title||'', x.category||'', x.url||'', x.notes||'']; }));
+
+  // Playlist
+  addSheet('Playlist', sk?['Názov piesne','Interpret','Moment']:['Song title','Artist','Moment'],
+    d.playlist.map(function(x){ return [x.title||'', x.artist||'', x.moment||'']; }));
+
+  // Poznámky / Notes
+  addSheet(sk?'Poznámky':'Notes', sk?['Poznámka','Vytvorené']:['Note','Created'],
+    d.notes.map(function(x){ return [x.text||'', x.createdAt||'']; }));
+
+  // Darčeky / Gifts
+  addSheet(sk?'Darčeky':'Gifts', sk?['Od koho','Darček','Poďakované']:['From','Gift','Thanked'],
+    d.gifts.map(function(x){ return [x.from||'', x.item||'', x.thanked?(sk?'Áno':'Yes'):(sk?'Nie':'No')]; }));
+
+  // Doprava / Transport
+  addSheet(sk?'Doprava a ubytovanie':'Transport & lodging', sk?['Názov','Typ','Dátum','Čas','Poznámka']:['Title','Type','Date','Time','Note'],
+    d.transport.map(function(x){ return [x.title||'', x.type||'', x.date||'', x.time||'', x.notes||'']; }));
+
+  // Pripomienky / Reminders
+  addSheet(sk?'Pripomienky':'Reminders', sk?['Text','Dátum','Hotovo']:['Text','Date','Done'],
+    d.reminders.map(function(x){ return [x.text||'', x.date||'', x.done?(sk?'Áno':'Yes'):(sk?'Nie':'No')]; }));
+
+  // Harmonogram / Events
+  addSheet(sk?'Harmonogram':'Schedule', sk?['Názov','Dátum','Čas']:['Title','Date','Time'],
+    d.events.map(function(x){ return [x.title||'', x.date||'', x.time||'']; }));
+
+  var namePart = (data.names || (sk?'nasa-svadba':'our-wedding')).toString().replace(/[^\w\-]+/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,'') || (sk?'export':'export');
+  var today = new Date();
+  var fname = namePart+'-export-'+today.getFullYear()+pad2(today.getMonth()+1)+pad2(today.getDate())+'.xlsx';
+  try{
+    XLSX.writeFile(wb, fname);
+    showToast(t('exportDone'));
+  }catch(e){
+    showToast(t('exportNoLibrary'));
+  }
+}
+
+var PALETTES = [
+  {id:'', swatch:'#AD8A4E', labelKey:'paletteNone'},
+  {id:'rose', swatch:'#E17FA0', labelKey:'paletteRose'},
+  {id:'sky', swatch:'#5B9BD5', labelKey:'paletteSky'},
+  {id:'lavender', swatch:'#9B7FD4', labelKey:'paletteLavender'},
+  {id:'mint', swatch:'#5FB897', labelKey:'paletteMint'},
+  {id:'peach', swatch:'#E39A6B', labelKey:'palettePeach'},
+  {id:'sun', swatch:'#E0B84A', labelKey:'paletteSun'}
+];
+function applyPalette(id){
+  if(id){ document.documentElement.setAttribute('data-palette', id); }
+  else { document.documentElement.removeAttribute('data-palette'); }
+}
+function setPalette(id){
+  data.palette = id;
+  applyPalette(id);
+  save();
+  render();
+}
+
+/* ===================== GENERIC EDIT SHEET ===================== */
+function childRowHtml(child){
+  child = child || {};
+  var opts = '<option value="">'+esc(t('sameAsGuestTable'))+'</option>' +
+    data.tables.map(function(tb){return '<option value="'+tb.id+'" '+(child.tableId===tb.id?'selected':'')+'>'+esc(tb.name)+'</option>';}).join('');
+  return '<div class="child-row" style="display:flex;gap:6px;margin-bottom:6px;">' +
+    '<input type="text" class="child-name" placeholder="'+esc(t('childName'))+'" value="'+esc(child.name||'')+'" style="flex:1;">' +
+    '<select class="child-table" style="flex:1;">'+opts+'</select>' +
+  '</div>';
+}
+
+function openEditSheet(key, id, defaults){
+  var cfg = CONFIGS[key];
+  var item;
+  if(id){
+    item = data[key].find(function(x){return x.id===id;});
+  } else {
+    item = {id:uid()};
+    if(defaults){ for(var dk in defaults){ item[dk] = defaults[dk]; } }
+  }
+  if(!id && key==='notes'){ item.createdAt = new Date().toLocaleDateString(LANG==='en'?'en-GB':'sk-SK'); }
+
+  var fieldsHtml = cfg.fields.map(function(f){
+    var val = item[f.key];
+    var fh = '<div class="field"><label>'+esc(f.label)+'</label>';
+    if(f.type==='text' || f.type==='number'){
+      fh += '<input type="'+f.type+'" data-key="'+f.key+'" placeholder="'+esc(f.placeholder||'')+'" value="'+esc(val==null?'':val)+'">';
+    } else if(f.type==='date'){
+      fh += '<input type="date" data-key="'+f.key+'" value="'+esc(val||'')+'">';
+    } else if(f.type==='time'){
+      fh += '<input type="time" data-key="'+f.key+'" value="'+esc(val||'')+'">';
+    } else if(f.type==='textarea'){
+      fh += '<textarea rows="3" data-key="'+f.key+'">'+esc(val||'')+'</textarea>';
+    } else if(f.type==='select'){
+      var opts = '<option value=""></option>' + f.options.map(function(o){return '<option value="'+esc(o)+'" '+(val===o?'selected':'')+'>'+esc(o)+'</option>';}).join('');
+      fh += '<select data-key="'+f.key+'">'+opts+'</select>';
+    } else if(f.type==='checkbox'){
+      fh = '<div class="field field-check"><input type="checkbox" data-key="'+f.key+'" id="chk_'+f.key+'" '+(val?'checked':'')+'><label for="chk_'+f.key+'" style="margin:0;">'+esc(f.label)+'</label>';
+    } else if(f.type==='guestTable'){
+      var curTable = data.tables.find(function(tb){ return (tb.guestIds||[]).indexOf(item.id)!==-1; });
+      var curId = curTable ? curTable.id : '';
+      var tOpts = '<option value="">'+esc(t('noTable'))+'</option>' +
+        data.tables.map(function(tb){return '<option value="'+tb.id+'" '+(curId===tb.id?'selected':'')+'>'+esc(tb.name)+'</option>';}).join('');
+      fh += '<select data-key="'+f.key+'">'+tOpts+'</select>';
+    } else if(f.type==='childrenList'){
+      var clist = item.childrenList;
+      var ccnt = clist ? clist.length : (Number(val)||0);
+      if(!clist){ clist = []; for(var ci=0; ci<ccnt; ci++) clist.push({name:'',tableId:''}); }
+      fh += '<input type="number" min="0" data-key="'+f.key+'" id="childCount" value="'+ccnt+'" style="max-width:100px;margin-bottom:8px;">' +
+            '<div id="childRows">'+clist.map(childRowHtml).join('')+'</div>';
+    }
+    fh += '</div>';
+    return fh;
+  }).join('');
+
+  var html = '<div class="sheet-close"><button id="shClose">'+t('close')+'</button></div>' +
+    '<h3 class="serif">'+(id?t('edit'):cfg.title)+'</h3>' +
+    fieldsHtml +
+    '<div class="sheet-actions"><button class="btn btn-gold btn-block" id="shSave">'+t('save')+'</button></div>' +
+    (id?'<a class="delete-link" id="shDelete">'+t('delete')+'</a>':'');
+
+  openSheet(html, function(sheet){
+    var childCountInput = sheet.querySelector('#childCount');
+    if(childCountInput){
+      var syncChildRows = function(){
+        var n = Math.max(0, Number(childCountInput.value)||0);
+        var wrap = sheet.querySelector('#childRows');
+        var rows = wrap.querySelectorAll('.child-row');
+        if(n > rows.length){
+          for(var i=rows.length;i<n;i++){ wrap.insertAdjacentHTML('beforeend', childRowHtml({})); }
+        } else if(n < rows.length){
+          for(var i=rows.length-1;i>=n;i--){ rows[i].remove(); }
+        }
+      };
+      childCountInput.oninput = syncChildRows;
+      childCountInput.onchange = syncChildRows;
+    }
+    sheet.querySelector('#shSave').onclick = function(){
+      var ok = true;
+      var pendingTableId;
+      var hasTableField = false;
+      cfg.fields.forEach(function(f){
+        var input = sheet.querySelector('[data-key="'+f.key+'"]');
+        if(!input) return;
+        if(f.type==='guestTable'){ hasTableField = true; pendingTableId = input.value; return; }
+        var v;
+        if(f.type==='checkbox') v = input.checked;
+        else if(f.type==='number' || f.type==='childrenList') v = input.value===''? '' : Number(input.value);
+        else v = input.value;
+        if(f.required && !v){ ok = false; input.style.borderColor = 'var(--danger)'; }
+        item[f.key] = v;
+      });
+      if(!ok){ showToast(t('fillRequired')); return; }
+      if(key==='guests'){
+        var childRows = sheet.querySelectorAll('.child-row');
+        var childArr = [];
+        childRows.forEach(function(row){
+          childArr.push({ name: row.querySelector('.child-name').value.trim(), tableId: row.querySelector('.child-table').value });
+        });
+        item.childrenList = childArr;
+        item.children = childArr.length;
+      }
+      if(!id) data[key].push(item);
+      if(hasTableField){
+        data.tables.forEach(function(tb){ tb.guestIds = (tb.guestIds||[]).filter(function(gid){return gid!==item.id;}); });
+        if(pendingTableId){
+          var tb2 = data.tables.find(function(x){return x.id===pendingTableId;});
+          if(tb2){ tb2.guestIds = tb2.guestIds || []; tb2.guestIds.push(item.id); }
+        }
+      }
+      save(); closeSheet(); render();
+      if(key==='reminders' && item.date){
+        var whenStr = fmtDate(item.date) + (item.time ? ' '+t('atTime')+' '+item.time : '');
+        showToast(t('reminderSetFor')+' '+whenStr, 3200);
+      } else {
+        showToast(t('saved'));
+      }
+    };
+    if(id){
+      sheet.querySelector('#shDelete').onclick = function(){
+        data[key] = data[key].filter(function(x){return x.id!==id;});
+        save(); closeSheet(); render(); showToast(t('deleted'));
+      };
+    }
+  });
+}
+
+/* ===================== SHEET / MODAL ===================== */
+function openSheet(html, onMount){
+  var overlay = document.getElementById('overlay');
+  var sheet = document.getElementById('sheet');
+  sheet.innerHTML = html;
+  overlay.classList.add('show');
+  var closeBtn = sheet.querySelector('#shClose');
+  if(closeBtn) closeBtn.onclick = closeSheet;
+  overlay.onclick = function(e){ if(e.target===overlay) closeSheet(); };
+  if(onMount) onMount(sheet);
+}
+function closeSheet(){
+  document.getElementById('overlay').classList.remove('show');
+}
+
+/* ===================== INIT ===================== */
+function initTheme(){
+  var mode = (data.darkMode==='dark' || data.darkMode==='light') ? data.darkMode : 'light';
+  document.documentElement.setAttribute('data-theme', mode);
+  document.getElementById('themeToggle').onclick = function(){ toggleTheme(); render(); };
+}
+
+load();
+LANG = (data.lang === 'en') ? 'en' : 'sk';
+document.documentElement.setAttribute('lang', LANG);
+applyPalette(data.palette || '');
+buildConfigs();
+initTheme();
+render();
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('sw.js').catch(function(){});
+  });
+}
+
+})();
+</script>
+</body>
+</html>
